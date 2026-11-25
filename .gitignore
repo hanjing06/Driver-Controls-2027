@@ -1,0 +1,43 @@
+# ---------- OS / editor ----------
+.DS_Store
+._*
+Thumbs.db
+*~
+.vscode/
+.idea/
+
+# ---------- KiCad ----------
+*.bak
+*.bck
+*-bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups/
+_autosave-*
+\#auto_saved_files\#
+fp-info-cache
+*.kicad_prl
+~*.lck
+*.net
+*.dsn
+*.ses
+
+# Keep our tracked CSVs (parts tracker, power budget, BOMs) - do NOT ignore *.csv
+
+# ---------- STM32CubeIDE build output ----------
+firmware/**/Debug/
+firmware/**/Release/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.map
+*.list
+*.hex
+*.bin
+.settings/language.settings.xml
+.metadata/
+
+# ---------- Host tests ----------
+firmware/tests/build/

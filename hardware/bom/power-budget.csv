@@ -1,0 +1,16 @@
+Rail,Load,Ref,Qty,I_typ_mA,I_max_mA,Duty,Total_I_max_mA,Datasheet_section,Notes
+3.3V,STM32F302R8 (run @64MHz),U1,1,,,1,,"Datasheet: Typical and maximum current consumption",
+3.3V,CAN transceiver (dominant),U3,1,,,1,,,
+3.3V,LCD + backlight,DS1,1,,,1,,,
+3.3V,Status LEDs,,,,,1,,,
+3.3V,I2C / input pull-ups,,,,,1,,,
+3.3V,SUBTOTAL x1.25 margin,,,,,,,,
+12V,Brake lights,,3,,,1,,,
+12V,Left turn signals,,3,,,0.5,,,
+12V,Right turn signals,,3,,,0.5,,,
+12V,DRL left/right,,2,,,1,,,
+12V,Pre-charge LEDs (blue),,5,,,1,,,
+12V,Main contactor LEDs (green),,5,,,1,,,
+12V,HV/LV/HVIL/Fault LEDs,,4,,,1,,,
+12V,Regulator input current,U2,1,,,1,,,"= P_out / (efficiency x 12V)"
+12V,TOTAL x1.25 margin,,,,,,,,
