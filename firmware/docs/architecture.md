@@ -6,11 +6,9 @@
 ┌──────────────────────────────────────────────────────────────┐
 │ app/  (our logic, testable on a PC where possible)           │
 │  vehicle_state · pedals · gear · lighting · indicators       │
-│  can_rx · can_tx · telemetry · display · faults              │
+│  can_bus · telemetry · display · faults                      │
 ├──────────────────────────────────────────────────────────────┤
-│ app/pinmap.h + bsp (thin wrappers: read input, set output)   │  ← only place that knows pins
-├──────────────────────────────────────────────────────────────┤
-│ drivers/  (LCD over I²C)                                     │
+│ app/common: pinmap.h + bsp (read input, set output, ADC)     │  ← only place that knows pins
 ├──────────────────────────────────────────────────────────────┤
 │ DriverControls/  (CubeMX generated: HAL, FreeRTOS, startup)  │
 └──────────────────────────────────────────────────────────────┘
@@ -29,18 +27,18 @@ Rule: modules in `app/` never call `HAL_GPIO_*` with a raw pin. They go through 
 | `vehicle_state` | State machine ([state-machine.md](state-machine.md)) | — (new) |
 | `lighting` | Brake light, turn signals, hazard blink, DRL | `ButtonManaging.c` (`brake_light`, …) |
 | `indicators` | Dash LEDs, fault LED, heartbeat | `led.c` |
-| `can_rx` | Receive & decode MC / BMS frames into shared telemetry | `CAN_Receive.c` |
-| `can_tx` | Send motor drive command (current + velocity) | `CAN_Transmit.c` |
+| `can_bus` | RX/TX queues on bxCAN; decode MC/BMS frames into telemetry; send drive command ([details](../app/can_bus/README.md)) | `CAN_Receive.c`, `CAN_Transmit.c` |
 | `telemetry` | Shared struct of latest values (mutex-protected); UART console print | `telem_to_console()` + globals |
-| `display` | Speed, pack V, faults on the LCD | — (new) |
+| `display` | LCD driver (I²C) + speed, pack V, faults screens | — (new) |
 | `faults` | Collect faults (thermal, HVIL, CAN timeout, pedal implausible), latch, report | — (new) |
 
 ## RTOS tasks (starting point)
 
 | Task | Period | Priority | Does |
 |---|---|---|---|
-| `can_rx_task` | event (queue from RX ISR) | High | Decode frames → `telemetry` |
-| `control_task` | 10 ms | High | Read pedals & gear → `vehicle_state` → `can_tx` drive command |
+| `can_rx_task` | event (RX queue from ISR) | High | Decode frames → `telemetry` |
+| `can_tx_task` | event (TX queue) | High | Move queued frames into free bxCAN mailboxes |
+| `control_task` | 10 ms | High | Read pedals & gear → `vehicle_state` → `can_send()` drive command |
 | `io_task` | 20 ms | Normal | Debounce buttons, run `lighting`, `indicators` |
 | `ui_task` | 200–500 ms | Low | `display` update, UART telemetry |
 | `watchdog` | — | — | IWDG refreshed only if all tasks checked in |
@@ -51,10 +49,10 @@ VCU_2025 had `can_tx`, `can_rx`, `buttons_100ms` and `buttons_500ms` tasks. The 
 
 ```
 ADC/DMA ─► pedals ─┐
-GPIO ───► gear ────┼─► vehicle_state ─► can_tx ─► Motor controller
+GPIO ───► gear ────┼─► vehicle_state ─► can_bus (TX queue) ─► Motor controller
 GPIO ───► buttons ─┘         │
                              ├─► lighting / indicators ─► MOSFETs, LEDs
-CAN RX ─► can_rx ─► telemetry ─► display, UART
+CAN RX ─► can_bus (RX queue) ─► telemetry ─► display, UART
                      └─► faults ─► vehicle_state
 ```
 

@@ -30,5 +30,5 @@ Short, present tense, prefixed: `hw: add 3V3 buck`, `fw: debounce gear selector`
 
 ## Firmware-specific
 
-- Our code goes in `firmware/app/` and `firmware/drivers/`. Only edit generated CubeMX files between `/* USER CODE BEGIN */` / `/* USER CODE END */`.
+- Our code goes in `firmware/app/<module>/`. Only edit generated CubeMX files between `/* USER CODE BEGIN */` / `/* USER CODE END */`.
 - Follow [`firmware/docs/coding-standards.md`](firmware/docs/coding-standards.md).

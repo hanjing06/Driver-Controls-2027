@@ -2,155 +2,130 @@
 
 Driver Controls / Vehicle Control Unit (VCU) PCB for **Western Sunstang**, 2027 car.
 
-This repo is the home base for the Driver Controls sub-team, and it's where new general members get onboarded. It holds both halves of the project:
+This repo is the home base for the Driver Controls sub-team, and it's where new general members get onboarded. **Every folder has a README that explains what that part of the system does and what we'd like you to do.** Start here, then follow your track.
 
-| Track | Folder | You'll work on |
-|-------|--------|----------------|
-| ⚡ **Hardware** | [`hardware/`](hardware/) | Part availability → current consumption → schematic → PCB layout → bring-up |
-| 💾 **Firmware** | [`firmware/`](firmware/) | STM32 C + FreeRTOS: pedals, lighting, vehicle state machine, CAN, display |
-
-> **New member?** Read [Getting started](#getting-started) below, then go to the onboarding guide for your track.
+| Track | Start here | First tasks |
+|---|---|---|
+| ⚡ **Hardware** | [`hardware/README.md`](hardware/README.md) | Join a **circuit block** → check part availability → calculate current consumption → design |
+| 💾 **Firmware** | [`firmware/README.md`](firmware/README.md) | **Research CAN** (and FreeRTOS, bxCAN, motor controller/BMS protocols) → implement **CAN RX/TX queues** |
 
 ---
 
-## What's new for 2027
+## A new design cycle: chip-down
 
-The previous board ([Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026)) was a carrier board for an **STM32 Nucleo-F302R8** dev board, running the [VCU_2025](https://github.com/uixt/VCU_2025) firmware. For 2027 we're **putting the STM32 chip directly on our own PCB**.
+The previous board ([Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026)) was a carrier board for an **STM32 Nucleo-F302R8** dev board, running the [VCU_2025](https://github.com/uixt/VCU_2025) firmware.
 
-That means the board now has to do everything the Nucleo did for us:
+**For 2027 we're starting a fresh design and replacing the dev board with the STM32 chip itself (STM32F302R8T6) on our own PCB.** The Nucleo used to give us power regulation, a clock, reset and a programmer. Now we design all of that ourselves.
 
-| Was handled by the Nucleo | Now on our PCB |
-|---------------------------|----------------|
-| 3.3 V regulator | 12 V → 3.3 V power stage (buck and/or LDO), input protection |
-| Clock (8 MHz from ST-LINK MCO) | 8 MHz HSE crystal and load caps (CAN needs an accurate clock) |
-| ST-LINK programmer/debugger | SWD debug connector, plus an external ST-LINK |
-| Reset button, BOOT0 strap | NRST circuit, BOOT0 pull-down |
-| Decoupling, VDDA filtering | 100 nF per VDD pin, bulk caps, VDDA ferrite and filter |
-| USB virtual COM port | UART debug header |
-
-Firmware is affected too. VCU_2025 runs from the chip's internal HSI oscillator on Nucleo default pins. The 2027 firmware moves to the HSE crystal, a pin map taken from **our** schematic, and SWD programming through our own header. See [`hardware/docs/nucleo-to-chip-migration.md`](hardware/docs/nucleo-to-chip-migration.md).
-
-**Target MCU (planned):** STM32F302R8T6 (LQFP-64). This is the same chip that's on the Nucleo, so last year's work carries over. *Update this line if the part changes.*
-
----
+Because members have a mix of experience, the work is split into small pieces. Each one is tagged:
+🟢 beginner-friendly · 🟡 intermediate · 🔴 advanced. Pairing a newer member with an experienced one is encouraged everywhere.
 
 ## What the board does
 
-The VCU is the low-voltage brain of the car. It reads the driver's controls, runs the vehicle state logic, and drives the 12 V lights and indicators.
+The VCU is the low-voltage brain of the car. It reads the driver's controls, decides what the car is allowed to do, commands the motor controllers over CAN, and drives the 12 V lights and indicators.
 
 <p align="center">
   <img src="docs/images/VCU_System_2026.png" width="800" alt="2026 VCU system integration diagram">
-  <br><em>2026 system diagram (reference; the 2027 version will go in docs/images)</em>
+  <br><em>2026 system diagram (reference)</em>
 </p>
 
-| Subsystem | Signals |
-|-----------|---------|
-| **Power & HV control** | LV/HV switches, pre-charge button, pre-charge & main contactor indicators, HV/LV/HVIL active, BMS interface |
-| **Driver inputs** | Accelerator pedal (ADC), brake pedal |
-| **Mode & gear** | Ready / Charge mode (SPDT), gear selector: Neutral / Reverse / Drive |
-| **Lighting** | Brake lights, left/right DRL, left/right turn signals, hazard (latching), driven through low-side MOSFETs |
-| **Safety** | Thermal shutoff, dash fault indicator, pre-charge verification before main contactor |
-| **Comms** | CAN bus, I²C character LCD, UART debug |
+| Subsystem | Hardware block | Firmware module |
+|---|---|---|
+| 12 V in → 3.3 V, protection | [`power`](hardware/circuits/power/) | — |
+| The STM32 chip + clock/reset | [`mcu-core`](hardware/circuits/mcu-core/) | [`common`](firmware/app/common/) |
+| Programming & debug | [`debug-programming`](hardware/circuits/debug-programming/) | [flashing guide](firmware/docs/flashing-and-debugging.md) |
+| CAN bus | [`can`](hardware/circuits/can/) | [`can_bus`](firmware/app/can_bus/) ⭐ |
+| Pedals, gear, buttons, mode switch | [`driver-inputs`](hardware/circuits/driver-inputs/) | [`pedals`](firmware/app/pedals/), [`gear`](firmware/app/gear/) |
+| Brake / turn / hazard / DRL lights | [`lighting`](hardware/circuits/lighting/) | [`lighting`](firmware/app/lighting/) |
+| HV startup chain & indicators | [`hv-interface`](hardware/circuits/hv-interface/) | [`indicators`](firmware/app/indicators/), [`vehicle_state`](firmware/app/vehicle_state/) |
+| Driver LCD | [`display`](hardware/circuits/display/) | [`display`](firmware/app/display/) |
+| Off-board wiring | [`connectors`](hardware/circuits/connectors/) | — |
 
-Two voltage domains: the **12 V automotive** domain (switches, lights, contactor indicators) and the **3.3 V logic** domain (MCU). Every signal crossing between them is conditioned. See [`docs/system-overview.md`](docs/system-overview.md).
-
----
+Full description: [`docs/system-overview.md`](docs/system-overview.md). Pin map (the contract between hardware and firmware): [`docs/interface-control.md`](docs/interface-control.md).
 
 ## Repository layout
 
 ```
 Sunstang-DriverControls-2027/
-├── README.md                  ← you are here
-├── CONTRIBUTING.md            ← branching, PRs, commit style
-├── docs/                      ← shared, system-level docs (both tracks)
-│   ├── onboarding.md          ← start here: accounts, tools, first week
-│   ├── system-overview.md     ← what the VCU does, voltage domains, startup sequence
-│   ├── interface-control.md   ← THE pin map: contract between hardware & firmware
-│   ├── images/
-│   └── reference/             ← notes on the 2026 board & VCU_2025 firmware
+├── README.md                    ← you are here
+├── CONTRIBUTING.md              ← branching, PRs, commit style
+├── docs/                        ← shared: system overview, pin map (ICD), notes on last year's work
 │
 ├── hardware/
-│   ├── README.md
-│   ├── docs/                  ← part selection, power budget, migration, checklists, bring-up
-│   ├── bom/                   ← parts-tracker.csv (Step 1), power-budget.csv (Step 2), BOMs
-│   ├── datasheets/            ← links to datasheets (not PDFs)
-│   ├── kicad/                 ← KiCad 9 project (hierarchical sheets)
-│   ├── libraries/             ← project-local symbols / footprints / 3D models
-│   ├── simulation/            ← LTspice / KiCad sim of input conditioning, power
-│   └── fabrication/           ← Gerbers / drill / pos files per revision
+│   ├── README.md                ← hardware onboarding + block assignments
+│   ├── circuits/                ← ONE FOLDER PER CIRCUIT BLOCK, each with its own README
+│   │   ├── power/  mcu-core/  debug-programming/  can/  driver-inputs/
+│   │   └── lighting/  hv-interface/  display/  connectors/
+│   ├── bom/                     ← parts-tracker.csv (step 1), power-budget.csv (step 2)
+│   ├── docs/                    ← how-to guides: part selection, power budget, checklists, layout, bring-up
+│   ├── kicad/                   ← KiCad 9 project (one hierarchical sheet per block)
+│   └── libraries/ datasheets/ simulation/ fabrication/
 │
-├── firmware/
-│   ├── README.md
-│   ├── docs/                  ← architecture, state machine, coding standards, flashing
-│   ├── DriverControls/        ← STM32CubeIDE project (generated HAL + FreeRTOS, .ioc)
-│   ├── app/                   ← OUR application code (kept out of generated files)
-│   │   ├── inc/               ← module interfaces (.h), already drafted
-│   │   └── src/               ← module implementations (.c), to be written
-│   ├── drivers/               ← device drivers (LCD, CAN transceiver helpers)
-│   ├── examples/              ← onboarding exercises (run on a Nucleo first)
-│   ├── tests/                 ← host-side unit tests for app/ logic
-│   └── tools/                 ← scripts (CAN DBC, log parsing, etc.)
-│
-└── .github/                   ← issue & PR templates
+└── firmware/
+    ├── README.md                ← firmware onboarding: what the system does + what to do
+    ├── research/                ← ONE FOLDER PER RESEARCH TOPIC (CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools)
+    ├── examples/                ← warm-up exercises on a Nucleo (blinky → ADC → CAN loopback)
+    ├── app/                     ← ONE FOLDER PER MODULE (.h, .c, README); can_bus/ is this year's main project
+    ├── tests/                   ← unit tests that run on a laptop
+    ├── DriverControls/          ← STM32CubeIDE project (created by the firmware lead)
+    └── docs/ tools/             ← reference docs; .dbc file and scripts
 ```
 
-**The most important file in this repo is [`docs/interface-control.md`](docs/interface-control.md).** It's the single table that says which signal goes to which MCU pin. Hardware owns it and firmware reads it. Any change to it needs a PR reviewed by **one member from each track**.
+## Getting started (everyone)
 
----
+1. **Get access:** ask the Driver Controls Lead to add you to the GitHub repo and the team channel.
+2. **Install Git** and clone this repo. New to Git? Try [learngitbranching.js.org](https://learngitbranching.js.org/) (about an hour).
+3. **Read** this page and [`docs/system-overview.md`](docs/system-overview.md).
+4. **Open your track's README** ([hardware](hardware/README.md) / [firmware](firmware/README.md)) and follow its "first week" section.
+5. **Read** [`CONTRIBUTING.md`](CONTRIBUTING.md) before your first PR.
 
-## Getting started
+```bash
+git pull                              # get the latest
+git checkout -b fw/research-can       # branch for your task (hw/... or fw/...)
+git add <files>
+git commit -m "fw: CAN fundamentals notes"
+git push -u origin fw/research-can    # then open a PR on GitHub
+```
 
-1. **Get access.** Ask the Driver Controls Lead to add you to the GitHub repo and the team channel.
-2. **Read** [`docs/onboarding.md`](docs/onboarding.md) and [`docs/system-overview.md`](docs/system-overview.md). Both tracks should read both.
-3. **Pick your track:**
-   - Hardware → [`hardware/docs/onboarding.md`](hardware/docs/onboarding.md)
-   - Firmware → [`firmware/docs/onboarding.md`](firmware/docs/onboarding.md)
-4. **Do the starter task** for your track (listed in its onboarding guide), then pick up an issue labelled `good first issue`.
-5. **Read** [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening your first PR.
-
-### Tools
-
-| | Hardware | Firmware |
-|---|---|---|
-| Main tool | [KiCad 9](https://www.kicad.org/download/) | [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html) (includes CubeMX) |
-| Also useful | Digi-Key / Mouser / LCSC accounts, LTspice, a multimeter | Nucleo-F302R8, ST-LINK, a USB-CAN adapter |
-| Everyone | Git + a GitHub account | |
-
----
-
-## Project roadmap
+## Roadmap
 
 | Phase | Hardware | Firmware |
-|-------|----------|----------|
-| **0. Onboarding** | Distributor accounts, review the 2026 schematic | Blinky / ADC / CAN examples on a Nucleo, read VCU_2025 |
-| **1. Parts & availability** | Check stock, lifecycle and alternates for every part → `parts-tracker.csv` | Write the state machine spec, confirm CAN messages |
-| **2. Current consumption** | Per-rail power budget → choose regulator, fuse, trace widths → `power-budget.csv` | Port VCU_2025 logic into `app/` modules on the Nucleo |
-| **3. Schematic** | Hierarchical schematic, freeze ICD, design review | Build `.ioc` from the pin map (HSE clock) |
-| **4. Layout** | Placement, routing, DRC, layout review | Develop app modules on Nucleo + breadboard |
-| **5. Fab & assembly** | Order PCB & parts, assemble | Host unit tests, bench test with simulated inputs |
-| **6. Bring-up** | Power-on checklist, rail checks | Port to the real board, flash over SWD, validate each I/O |
-| **7. Integration** | Harness and in-car testing | Full startup sequence and CAN with the rest of the car |
+|---|---|---|
+| **0. Onboarding** | Join a block, read last year's schematic | Toolchain + warm-up examples on a Nucleo |
+| **1. Research & parts** | Part selection & availability per block | Research topics (CAN first), present at meetings |
+| **2. Numbers** | Current consumption → regulator, fuse, MOSFET choices | CAN RX/TX queues + encode/decode + unit tests |
+| **3. Schematic** | Each block draws its sheet, design review, pin map frozen | Bench test CAN with a USB-CAN adapter; start other modules |
+| **4. Layout & fab** | Placement, routing, order PCB & parts | Port app modules to the `.ioc` for our pin map (HSE clock) |
+| **5. Bring-up** | Power-on checklist | Flash over SWD, validate each I/O |
+| **6. Integration** | In-car testing | Full startup sequence and CAN with the rest of the car |
 
-**Hardware members don't start in KiCad.** The first job is checking that every part is buyable (Step 1), then adding up the current draw (Step 2). Only then do we draw the schematic. See [`hardware/docs/onboarding.md`](hardware/docs/onboarding.md).
+## Glossary
 
-Progress is tracked in GitHub Issues / Projects.
-
----
+| Term | Meaning |
+|---|---|
+| VCU | Vehicle Control Unit, this board |
+| LV / HV | Low voltage (12 V system) / High voltage (traction battery) |
+| Chip-down | Putting the bare microcontroller on our PCB instead of plugging in a dev board |
+| CAN | Controller Area Network, the bus all the car's boards talk on |
+| Pre-charge | Slowly charging the motor controller's capacitors before closing the main contactor |
+| HVIL | High-Voltage Interlock Loop, a safety loop that opens if an HV connector is unplugged |
+| BMS | Battery Management System |
+| DRL | Daytime Running Light |
+| ICD | Interface Control Document, our pin map |
+| SWD | Serial Wire Debug, how we flash the chip |
+| HAL / `.ioc` | ST's driver library / the CubeMX config file |
 
 ## Contacts
 
 | Role | Name |
-|------|------|
+|---|---|
 | Driver Controls Lead | Hanjing Lin |
 | Hardware track lead | *TBD* |
 | Firmware track lead | *TBD* |
 
----
-
 ## References
 
-- Previous board: [hanjing06/Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026) (notes: [`docs/reference/2026-vcu.md`](docs/reference/2026-vcu.md))
-- Previous firmware: [uixt/VCU_2025](https://github.com/uixt/VCU_2025) (notes: [`docs/reference/2025-firmware.md`](docs/reference/2025-firmware.md))
-- [STM32F302R8 product page](https://www.st.com/en/microcontrollers-microprocessors/stm32f302r8.html): datasheet, reference manual (RM0365), errata
-- [AN4206: Getting started with STM32F3 hardware development](https://www.st.com/resource/en/application_note/an4206-getting-started-with-stm32f3-series-hardware-development-stmicroelectronics.pdf): **required reading for the chip-down design**
-- [Nucleo-F302R8](https://www.st.com/en/evaluation-tools/nucleo-f302r8.html): the 2026 board's MCU, and still the best way to prototype firmware
+- Previous board: [hanjing06/Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026) · notes: [`docs/reference/2026-vcu.md`](docs/reference/2026-vcu.md)
+- Previous firmware: [uixt/VCU_2025](https://github.com/uixt/VCU_2025) · notes: [`docs/reference/2025-firmware.md`](docs/reference/2025-firmware.md)
+- [STM32F302R8 product page](https://www.st.com/en/microcontrollers-microprocessors/stm32f302r8.html): datasheet, RM0365 reference manual
+- ST AN4206: *Getting started with STM32F3 hardware development*

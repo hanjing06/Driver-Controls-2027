@@ -9,7 +9,7 @@ Short on purpose. Consistency over cleverness.
 - Signal names match the ICD/KiCad net names: `PIN_BRAKE_LIGHT_OUT` ↔ `BrakeLightOut`
 
 ## Rules
-1. Our code lives in `app/` and `drivers/`. In generated files, only write between `USER CODE BEGIN/END`.
+1. Our code lives in `app/<module>/`. In generated files, only write between `USER CODE BEGIN/END`.
 2. No raw `HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, …)` in `app/`; use `pinmap.h` names via `bsp`.
 3. No new `extern` globals; expose getters from the owning module.
 4. Data shared between tasks goes through a queue or a mutex.
