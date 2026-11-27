@@ -74,21 +74,53 @@ Full description: [`docs/system-overview.md`](docs/system-overview.md). Pin map 
 
 ## Repository layout
 
+```
+Driver-Controls-2027/
+├── README.md, CONTRIBUTING.md
+├── .github/                      issue + PR templates (part-check, task)
+├── docs/                         system overview, ICD (pin map), notes on 2025/2026
+├── hardware/
+│   ├── README.md                 hardware onboarding
+│   ├── bom/                      parts-tracker.csv, power-budget.csv, current-calculations.xlsx
+│   ├── circuits/                 one folder + README per block:
+│   │   ├── power/  mcu-core/  debug-programming/  can/
+│   │   └── driver-inputs/  lighting/  hv-interface/  display/  connectors/
+│   ├── datasheets/  docs/  fabrication/  libraries/  simulation/
+│   └── kicad/DriverControls/     KiCad project (see schematic hierarchy in hardware/kicad/README.md)
+│       ├── Sunstang_DriverControls.kicad_pro / .kicad_sch   (root project)
+│       ├── DriverControls.kicad_pro / .kicad_sch / .kicad_pcb
+│       ├── dc2027.kicad_sch      hierarchy sheet
+│       └── STM32 / USB / PowerSupply / User_IO .kicad_sch
+└── firmware/
+    ├── README.md, DriverControls/ (CubeMX project)
+    ├── research/                 CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools
+    ├── examples/                 01-blinky, 02-adc-pedal, 03-can-loopback
+    ├── app/                      can_bus, pedals, gear, lighting, indicators, display,
+    │                             faults, telemetry, vehicle_state, common
+    ├── tests/  tools/  docs/
+```
+
 | Folder | What's in it |
 |---|---|
 | [`docs/`](docs/) | Shared by both tracks: system overview, pin map (ICD), notes on last year's work |
 | [`hardware/`](hardware/README.md) | **Hardware onboarding** and everything for the PCB |
-| ↳ [`hardware/circuits/`](hardware/README.md#4-circuit-blocks-and-assignments) | One folder per circuit block, each with its own README: [power](hardware/circuits/power/) · [mcu-core](hardware/circuits/mcu-core/) · [debug-programming](hardware/circuits/debug-programming/) · [can](hardware/circuits/can/) · [driver-inputs](hardware/circuits/driver-inputs/) · [lighting](hardware/circuits/lighting/) · [hv-interface](hardware/circuits/hv-interface/) · [display](hardware/circuits/display/) · [connectors](hardware/circuits/connectors/) |
-| ↳ [`hardware/bom/`](hardware/bom/) | `parts-tracker.csv` (step 1), `power-budget.csv` (step 2) |
+| ↳ [`hardware/circuits/`](hardware/README.md#4-circuit-blocks-and-assignments) | One folder per circuit block, each with its own README |
+| ↳ [`hardware/bom/`](hardware/bom/) | `parts-tracker.csv` (step 1), `power-budget.csv` + `current-calculations.xlsx` (step 2) |
 | ↳ [`hardware/docs/`](hardware/docs/) | How-to guides: part selection, power budget, checklists, layout, bring-up |
-| ↳ [`hardware/kicad/`](hardware/kicad/) | KiCad 9 project (one hierarchical sheet per block) |
+| ↳ [`hardware/kicad/`](hardware/kicad/) | KiCad project and schematic hierarchy |
 | [`firmware/`](firmware/README.md) | **Firmware onboarding** and all the code |
-| ↳ [`firmware/research/`](firmware/research/) | One folder per research topic (CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools) |
-| ↳ [`firmware/examples/`](firmware/examples/) | Warm-up exercises on a Nucleo (blinky → ADC → CAN loopback) |
-| ↳ [`firmware/app/`](firmware/app/) | One folder per module (`.h`, `.c`, README); [`can_bus/`](firmware/app/can_bus/) is this year's main project |
-| ↳ [`firmware/tests/`](firmware/tests/) | Unit tests that run on a laptop |
-| ↳ [`firmware/docs/`](firmware/docs/) | Reference: architecture, CAN messages, state machine, coding standards, flashing |
+| ↳ [`firmware/research/`](firmware/research/) | One folder per research topic |
+| ↳ [`firmware/examples/`](firmware/examples/) | Warm-up exercises on a Nucleo |
+| ↳ [`firmware/app/`](firmware/app/) | One folder per module; [`can_bus/`](firmware/app/can_bus/) is this year's main project |
+| ↳ [`firmware/tests/`](firmware/tests/) · [`firmware/docs/`](firmware/docs/) | Laptop unit tests · reference docs |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Branching, PRs, commit style |
+
+## TODO
+
+- [ ] **Check availability of all major parts** (stock at 2+ distributors, lifecycle, backup part) and record in [`hardware/bom/parts-tracker.csv`](hardware/bom/parts-tracker.csv): MCU, regulator, CAN transceiver, CAN ESD, crystal, SWD connector, lighting MOSFETs, LCD, MX150 connectors
+- [ ] **Update the 20-pin headers** to use the same footprint as the Nucleo board headers
+- [ ] **Recalculate current consumption** using [`hardware/bom/current-calculations.xlsx`](hardware/bom/current-calculations.xlsx) (fill the blue cells from datasheets), then pick regulator, fuse and MOSFETs
+- [ ] Populate the schematic hierarchy sheets (see [`hardware/kicad/README.md`](hardware/kicad/README.md))
 
 ## Getting started (everyone)
 

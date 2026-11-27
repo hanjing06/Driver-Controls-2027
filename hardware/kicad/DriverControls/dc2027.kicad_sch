@@ -1,0 +1,197 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "fcd6d3d1-fa43-4f92-bcf0-32e1fdc7cf75")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 71.12 57.15)
+		(size 24.13 29.21)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "199c9e20-206c-4e08-a099-84d0e42a56e6")
+		(property "Sheetname" "STM32"
+			(at 71.12 56.4384 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "STM32.kicad_sch"
+			(at 71.12 86.9446 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Sunstang_DriverControls"
+				(path "/fe2a3620-cf98-4d6a-b5d1-5ac4eb1a5a2c"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 29.21 57.15)
+		(size 24.13 29.21)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8a0fd8cf-b5e4-4b6d-96ec-b73769487234")
+		(property "Sheetname" "USB"
+			(at 29.21 56.4384 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "USB.kicad_sch"
+			(at 29.21 86.9446 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Sunstang_DriverControls"
+				(path "/fe2a3620-cf98-4d6a-b5d1-5ac4eb1a5a2c"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 113.03 57.15)
+		(size 22.86 29.21)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fbb39ee4-ddc8-4540-b865-5bc48aeef49a")
+		(property "Sheetname" "User_IO"
+			(at 113.03 56.4384 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "User_IO.kicad_sch"
+			(at 113.03 86.9446 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Sunstang_DriverControls"
+				(path "/fe2a3620-cf98-4d6a-b5d1-5ac4eb1a5a2c"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 69.85 104.14)
+		(size 25.4 31.75)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fcaca82b-e670-4d40-a255-1e4d73da4e3d")
+		(property "Sheetname" "PowerSupply"
+			(at 69.85 103.4284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "PowerSupply.kicad_sch"
+			(at 69.85 136.4746 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Sunstang_DriverControls"
+				(path "/fe2a3620-cf98-4d6a-b5d1-5ac4eb1a5a2c"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "2")
+		)
+	)
+)
