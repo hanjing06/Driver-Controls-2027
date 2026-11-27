@@ -43,10 +43,10 @@ More detail: [`docs/architecture.md`](docs/architecture.md), [`docs/can-messages
 
 | # | Task | Folder | Assigned to |
 |---|---|---|---|
-| 1 | Wire all three devices on one CAN bus and watch it with SavvyCAN | [`integration-test/01-can-bus-setup/`](integration-test/01-can-bus-setup/) | |
-| 2 | Send drive commands from the STM32 to the motor controllers | [`integration-test/02-motor-controller/`](integration-test/02-motor-controller/) | |
+| 1 | Wire all three devices on one CAN bus and watch it with SavvyCAN | [`integration-test/01-can-bus-setup/`](integration-test/01-can-bus-setup/) | Cindy |
+| 2 | Send drive commands from the STM32 to the motor controllers | [`integration-test/02-motor-controller/`](integration-test/02-motor-controller/) | Samarth |
 | 3 | Read BMS telemetry | [`integration-test/03-bms-telemetry/`](integration-test/03-bms-telemetry/) | |
-| 4 | Test the real accelerator pedal end to end | [`integration-test/04-accel-pedal/`](integration-test/04-accel-pedal/) | |
+| 4 | Test the real accelerator pedal end to end | [`integration-test/04-accel-pedal/`](integration-test/04-accel-pedal/) | Owen, Sahil|
 | 5 | Write the test procedure and record results | [`integration-test/test-log.md`](integration-test/test-log.md) | |
 
 Five tasks, one per person. Pair newer members with someone who has used a microcontroller before. Motor and BMS tests involve the high-voltage system, so **read the [safety section](integration-test/README.md#safety) first**.
