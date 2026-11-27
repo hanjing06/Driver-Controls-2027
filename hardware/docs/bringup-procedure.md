@@ -1,5 +1,7 @@
 # Board Bring-Up Procedure
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Bring-up procedure**
+
 Do these **in order**. Record results in a GitHub issue per board (`Bring-up: revA #1`).
 
 ## 0. Before power

@@ -1,4 +1,6 @@
-# HV Interface & Indicators 🟡
+# HV Interface & Indicators
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **HV interface**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/hv_interface.kicad_sch`
@@ -31,16 +33,16 @@ Mostly the same, but it's a new design cycle, so question everything:
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Pick indicator LEDs (blue, green, red/amber) and check stock. 2026 used LiteOn LTST 1206/0603.
-- 🟢 Confirm connector pinouts with the pre-charge and power distribution board teams (who sends what, at what voltage?).
+- Pick indicator LEDs (blue, green, red/amber) and check stock. 2026 used LiteOn LTST 1206/0603.
+- Confirm connector pinouts with the pre-charge and power distribution board teams (who sends what, at what voltage?).
 
 ### Step 2: Current consumption
-- 🟢 LED resistor at 12 V: `R = (12 − V_f) / I_LED`, and resistor power `P = I² × R` (check the resistor's power rating!). Fill `power-budget.csv`.
+- LED resistor at 12 V: `R = (12 − V_f) / I_LED`, and resistor power `P = I² × R` (check the resistor's power rating!). Fill `power-budget.csv`.
 
 ### Step 3: Design
-- 🟢 Draw the LED indicator circuits.
-- 🟡 Draw the switch pass-through paths and confirm with the electrical lead.
-- 🟡 If the MCU should read any HV status lines, add them to the ICD (`icd/` PR) and coordinate with the Driver Inputs block.
+- Draw the LED indicator circuits.
+- Draw the switch pass-through paths and confirm with the electrical lead.
+- If the MCU should read any HV status lines, add them to the ICD (`icd/` PR) and coordinate with the Driver Inputs block.
 
 ## Research questions (`notes.md`)
 - What is pre-charge and why must it finish before the main contactor closes?

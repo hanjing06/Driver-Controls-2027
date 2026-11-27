@@ -1,4 +1,6 @@
-# MCU Core 🔴
+# MCU Core
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **MCU core**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/mcu.kicad_sch`
@@ -26,19 +28,19 @@ Everything above is new for us. The good news: ST publishes a known-good referen
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Check availability of **STM32F302R8T6** (and a backup: e.g. another F302/F303 in LQFP-64 with the same pinout). Fill `parts-tracker.csv`.
-- 🟢 Find an **8 MHz crystal** in stock. Write down its **load capacitance (CL)** and ESR. You'll need them in Step 3.
-- 🟢 Pick the decoupling capacitor and ferrite bead parts (size, voltage rating, dielectric X7R).
+- Check availability of **STM32F302R8T6** (and a backup: e.g. another F302/F303 in LQFP-64 with the same pinout). Fill `parts-tracker.csv`.
+- Find an **8 MHz crystal** in stock. Write down its **load capacitance (CL)** and ESR. You'll need them in Step 3.
+- Pick the decoupling capacitor and ferrite bead parts (size, voltage rating, dielectric X7R).
 
 ### Step 2: Current consumption
-- 🟡 From the STM32F302R8 datasheet, find **run-mode current at 64 MHz with peripherals on** (typ and max) → `power-budget.csv`.
-- 🟢 Add I/O current: how many LEDs/pins does the MCU drive directly? Ask the other blocks.
+- From the STM32F302R8 datasheet, find **run-mode current at 64 MHz with peripherals on** (typ and max) → `power-budget.csv`.
+- Add I/O current: how many LEDs/pins does the MCU drive directly? Ask the other blocks.
 
 ### Step 3: Design
-- 🟢 Count the VDD/VSS pins on the LQFP-64 and place one 100 nF cap per VDD pin.
-- 🟡 Calculate the **crystal load caps**: `C = 2 × (CL − C_stray)`, assume C_stray ≈ 3–5 pF. Show your work in `calcs.md`.
-- 🟡 VDDA filter, NRST and BOOT0 circuits from AN4206.
-- 🔴 Pin assignment: with the firmware lead, assign every signal in [`../../../docs/interface-control.md`](../../../docs/interface-control.md) to a real pin. Check alternate functions in the **datasheet pinout table**, not just CubeMX.
+- Count the VDD/VSS pins on the LQFP-64 and place one 100 nF cap per VDD pin.
+- Calculate the **crystal load caps**: `C = 2 × (CL − C_stray)`, assume C_stray ≈ 3–5 pF. Show your work in `calcs.md`.
+- VDDA filter, NRST and BOOT0 circuits from AN4206.
+- Pin assignment: with the firmware lead, assign every signal in [`../../../docs/interface-control.md`](../../../docs/interface-control.md) to a real pin. Check alternate functions in the **datasheet pinout table**, not just CubeMX.
 
 ## Research questions (`notes.md`)
 - Why does every VDD pin need its own capacitor, placed as close as possible?

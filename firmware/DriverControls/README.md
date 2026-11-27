@@ -1,5 +1,7 @@
 # DriverControls: STM32CubeIDE Project
 
+[Home](../../README.md) › [Firmware](../README.md) › **CubeIDE project**
+
 Generated project for the STM32F302R8T6. **CubeMX owns this folder**: only write code between `/* USER CODE BEGIN */ … /* USER CODE END */`.
 
 ## Creating it (one-time, firmware lead)

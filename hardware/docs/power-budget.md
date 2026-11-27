@@ -1,5 +1,7 @@
 # Step 2: Current Consumption / Power Budget
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Power budget**
+
 Once parts are picked ([Step 1](part-selection.md)), we add up how much current each rail must supply. **This decides the regulator** (buck vs. LDO, current rating), the input fuse, trace widths and connector ratings. Do it before the schematic.
 
 Fill in [`../bom/power-budget.csv`](../bom/power-budget.csv).

@@ -1,4 +1,6 @@
-# Driver Inputs 🟡
+# Driver Inputs
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Driver inputs**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/driver_inputs.kicad_sch`
@@ -34,19 +36,19 @@ The topology can stay similar. Re-check every value, because the pins are now on
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Find the accelerator and brake pedal sensors' datasheets (ask the mech/electrical lead what pedals the car uses). Write down output voltage range.
-- 🟢 Pick resistor/capacitor sizes (0805 or 0603), clamp diodes (e.g. BAT54S), and check stock.
-- 🟡 If using transistor or opto stages: compare 2 parts each.
+- Find the accelerator and brake pedal sensors' datasheets (ask the mech/electrical lead what pedals the car uses). Write down output voltage range.
+- Pick resistor/capacitor sizes (0805 or 0603), clamp diodes (e.g. BAT54S), and check stock.
+- If using transistor or opto stages: compare 2 parts each.
 
 ### Step 2: Current consumption
-- 🟢 For each 12 V input stage: current through the divider at 12 V (`I = 12 / (R1 + R2)`) × number of inputs → `power-budget.csv`.
+- For each 12 V input stage: current through the divider at 12 V (`I = 12 / (R1 + R2)`) × number of inputs → `power-budget.csv`.
 
 ### Step 3: Design
-- 🟢 **Digital stage:** pick R1/R2 so 12 V → ~3.0 V. Check the *worst case* (e.g. 14.4 V when charging, or a spike) stays ≤ 3.6 V with the clamp. Show calcs in `calcs.md`.
-- 🟢 **RC filter:** pick R and C for a cutoff around TBD Hz (`fc = 1 / (2πRC)`). Agree with firmware on what's done in hardware vs. software debounce.
-- 🟡 **Pedal ADC stage:** scale the pedal's range to 0–3.3 V, add the filter, and check the ADC input impedance requirement in the datasheet.
-- 🟡 **Simulate** one digital stage and the pedal stage in LTspice → save `.asc` files here.
-- 🟢 Copy the approved stage for every input and label the nets exactly as in the ICD.
+- **Digital stage:** pick R1/R2 so 12 V → ~3.0 V. Check the *worst case* (e.g. 14.4 V when charging, or a spike) stays ≤ 3.6 V with the clamp. Show calcs in `calcs.md`.
+- **RC filter:** pick R and C for a cutoff around TBD Hz (`fc = 1 / (2πRC)`). Agree with firmware on what's done in hardware vs. software debounce.
+- **Pedal ADC stage:** scale the pedal's range to 0–3.3 V, add the filter, and check the ADC input impedance requirement in the datasheet.
+- **Simulate** one digital stage and the pedal stage in LTspice → save `.asc` files here.
+- Copy the approved stage for every input and label the nets exactly as in the ICD.
 
 ## Research questions (`notes.md`)
 - What is switch bounce, and should we filter it in hardware, software, or both?

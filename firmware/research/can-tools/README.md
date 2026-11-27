@@ -1,4 +1,6 @@
-# Research: CAN Tools & DBC Files 🟢
+# Research: CAN Tools & DBC Files
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **CAN tools**
 
 **Assigned to:**
 **Read first:** [`../can-fundamentals/`](../can-fundamentals/)

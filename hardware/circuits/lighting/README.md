@@ -1,4 +1,6 @@
-# Lighting 🟡
+# Lighting
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Lighting**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/lighting.kicad_sch`
@@ -34,19 +36,19 @@ Same idea, but this is a chance to shrink: swap TO-220s for **SMD logic-level MO
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Find out what light modules the car uses (ask the electrical/aerobody lead) and their **current at 12 V**.
-- 🟢 Check FQP30N06L availability, and find 2 **SMD** logic-level N-MOSFETs (SOT-23 / SOT-223 / DPAK) fully on at **V_GS = 3.3 V** (look for R_DS(on) specified at 2.5 V or 3.3 V or 4.5 V).
-- 🟢 Pick fuses per output channel.
+- Find out what light modules the car uses (ask the electrical/aerobody lead) and their **current at 12 V**.
+- Check FQP30N06L availability, and find 2 **SMD** logic-level N-MOSFETs (SOT-23 / SOT-223 / DPAK) fully on at **V_GS = 3.3 V** (look for R_DS(on) specified at 2.5 V or 3.3 V or 4.5 V).
+- Pick fuses per output channel.
 
 ### Step 2: Current consumption
-- 🟢 Fill each light's current × quantity × duty (turn signals ≈ 50 %) into the 12 V section of `power-budget.csv`.
-- 🟡 For each MOSFET: `P = I² × R_DS(on)`. Is it below what the package can dissipate without a heatsink?
+- Fill each light's current × quantity × duty (turn signals ≈ 50 %) into the 12 V section of `power-budget.csv`.
+- For each MOSFET: `P = I² × R_DS(on)`. Is it below what the package can dissipate without a heatsink?
 
 ### Step 3: Design
-- 🟢 Draw one channel: MOSFET, gate resistor (~100 Ω), gate pull-down (~10–100 kΩ, keeps the light off while the MCU boots), fuse.
-- 🟡 Add **flyback/TVS protection** if any load is inductive or the wiring is long.
-- 🟢 Copy for every output, net names per the ICD.
-- 🟡 *Optional:* should any outputs support PWM dimming (DRL)? Agree with firmware.
+- Draw one channel: MOSFET, gate resistor (~100 Ω), gate pull-down (~10–100 kΩ, keeps the light off while the MCU boots), fuse.
+- Add **flyback/TVS protection** if any load is inductive or the wiring is long.
+- Copy for every output, net names per the ICD.
+- *Optional:* should any outputs support PWM dimming (DRL)? Agree with firmware.
 
 ## Research questions (`notes.md`)
 - What does "logic-level MOSFET" mean? Why does V_GS(th) not tell you the MOSFET is fully on?

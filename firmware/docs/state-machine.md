@@ -1,5 +1,7 @@
 # Vehicle State Machine
 
+[Home](../../README.md) › [Firmware](../README.md) › [Docs](README.md) › **State machine**
+
 *Draft. Firmware track to finalize with the electrical lead during Phase 1.*
 
 ```

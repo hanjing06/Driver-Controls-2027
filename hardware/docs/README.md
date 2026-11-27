@@ -1,5 +1,7 @@
 # Hardware How-To Guides
 
+[Home](../../README.md) › [Hardware](../README.md) › **Docs**
+
 Shared guides used by every circuit block. Your instructions are in [`../README.md`](../README.md) and your block's README in [`../circuits/`](../circuits/).
 
 | Step | Guide | Contents |

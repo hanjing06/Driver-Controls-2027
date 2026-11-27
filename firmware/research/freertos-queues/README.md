@@ -1,4 +1,6 @@
-# Research: FreeRTOS Tasks & Queues 🟢🟡
+# Research: FreeRTOS Tasks & Queues
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **FreeRTOS queues**
 
 **Assigned to:**
 

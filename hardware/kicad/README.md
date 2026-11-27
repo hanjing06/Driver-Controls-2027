@@ -1,5 +1,7 @@
 # KiCad Project
 
+[Home](../../README.md) › [Hardware](../README.md) › **KiCad**
+
 Create the project here with **KiCad 9** as `DriverControls.kicad_pro`, then add hierarchical sheets (see the table in [`../README.md`](../README.md)):
 
 ```

@@ -1,5 +1,7 @@
 # Flashing & Debugging
 
+[Home](../../README.md) › [Firmware](../README.md) › [Docs](README.md) › **Flashing and debugging**
+
 ## On a Nucleo-F302R8 (prototyping, now)
 Plug in USB → CubeIDE **Run** (green play) or **Debug** (bug). The on-board ST-LINK does everything. UART console = the Nucleo's virtual COM port (USART2, PA2/PA3) at 115200 baud (check the `.ioc`).
 

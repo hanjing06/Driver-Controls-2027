@@ -1,4 +1,6 @@
-# Research: BMS CAN Protocol 🟡
+# Research: BMS CAN Protocol
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **BMS CAN**
 
 **Assigned to:**
 **Read first:** [`../can-fundamentals/`](../can-fundamentals/)

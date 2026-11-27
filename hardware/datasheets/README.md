@@ -1,5 +1,7 @@
 # Datasheets
 
+[Home](../../README.md) › [Hardware](../README.md) › **Datasheets**
+
 Link datasheets here instead of committing PDFs (keeps the repo small, links stay current).
 
 | Ref | Part | Function | Datasheet |

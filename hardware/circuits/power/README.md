@@ -1,4 +1,6 @@
-# Power 🔴
+# Power
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Power**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/power.kicad_sch`
@@ -12,7 +14,7 @@ Takes the car's **12 V** low-voltage supply and turns it into a clean **3.3 V** 
                                                                      (buck and/or LDO)
 ```
 
-If this block doesn't work, nothing on the board works. That's why it's 🔴.
+If this block doesn't work, nothing on the board works. That's why it's one of the most critical blocks.
 
 ## How it was done before
 
@@ -28,22 +30,22 @@ Also decide: **do we need a 5 V rail?** Only if the CAN block keeps a 5 V transc
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Find 2–3 candidate **fuses/PPTCs** and **TVS diodes** rated for automotive 12 V. Fill in `parts-tracker.csv`.
-- 🟢 Find a **reverse-polarity** part: a Schottky diode (simple) or P-MOSFET (lower loss). List one of each.
-- 🟡 Find 2–3 candidate **3.3 V regulators** (at least one buck, one LDO). Record input voltage range, output current, quiescent current, package, stock.
-- 🔴 Pick the regulator once Step 2 numbers are in.
+- Find 2–3 candidate **fuses/PPTCs** and **TVS diodes** rated for automotive 12 V. Fill in `parts-tracker.csv`.
+- Find a **reverse-polarity** part: a Schottky diode (simple) or P-MOSFET (lower loss). List one of each.
+- Find 2–3 candidate **3.3 V regulators** (at least one buck, one LDO). Record input voltage range, output current, quiescent current, package, stock.
+- Pick the regulator once Step 2 numbers are in.
 
 ### Step 2: Current consumption
-- 🟡 Collect the 3.3 V current from every other block (MCU, CAN, LCD, LEDs, pull-ups) into the 3.3 V section of `power-budget.csv`.
-- 🟡 Add 25 % margin → required regulator current.
-- 🔴 Calculate regulator heat (LDO) or efficiency/input current (buck), and the temperature rise `ΔT = P × θJA`.
-- 🟡 Size the **input fuse** from the total 12 V current (this block + lights + LEDs).
+- Collect the 3.3 V current from every other block (MCU, CAN, LCD, LEDs, pull-ups) into the 3.3 V section of `power-budget.csv`.
+- Add 25 % margin → required regulator current.
+- Calculate regulator heat (LDO) or efficiency/input current (buck), and the temperature rise `ΔT = P × θJA`.
+- Size the **input fuse** from the total 12 V current (this block + lights + LEDs).
 
 ### Step 3: Design
-- 🟢 Draw the fuse + reverse-polarity + TVS section from the datasheets' typical application circuits.
-- 🔴 Design the regulator: input/output caps, inductor (buck), feedback resistors, per the datasheet. Write the calcs in `calcs.md`.
-- 🟡 Add a power-good LED and test points on 12 V, 3.3 V and GND.
-- 🟡 *Optional:* simulate the regulator in LTspice (many TI/ADI parts have models) → save in this folder.
+- Draw the fuse + reverse-polarity + TVS section from the datasheets' typical application circuits.
+- Design the regulator: input/output caps, inductor (buck), feedback resistors, per the datasheet. Write the calcs in `calcs.md`.
+- Add a power-good LED and test points on 12 V, 3.3 V and GND.
+- *Optional:* simulate the regulator in LTspice (many TI/ADI parts have models) → save in this folder.
 
 ## Research questions (write answers in `notes.md`)
 - What transients can a 12 V vehicle system see (load dump, cranking)? What does our DC-DC from the battery box actually output?

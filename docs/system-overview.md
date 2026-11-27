@@ -1,5 +1,7 @@
 # System Overview
 
+[Home](../README.md) › [Docs](README.md) › **System overview**
+
 ## Where the VCU sits in the car
 
 The Driver Controls board (VCU) sits between the **driver** and the rest of the **low-voltage system**. It connects to:

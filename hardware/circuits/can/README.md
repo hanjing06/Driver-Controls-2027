@@ -1,4 +1,6 @@
-# CAN 🟡
+# CAN
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **CAN**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/can.kicad_sch`
@@ -24,17 +26,17 @@ We generate our own rails, so we choose: **switch to a 3.3 V transceiver** (no 5
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Compare 3.3 V transceivers: **SN65HVD230**, **TCAN334**, **MCP2562 (with VIO = 3.3 V)**, and others. Record supply voltage, standby mode, ESD rating, package and stock.
-- 🟢 Check that **NUP2105LT1G** (ESD) is still available, and find an alternate.
-- 🟢 Pick a jumper or solder bridge for the termination resistor.
+- Compare 3.3 V transceivers: **SN65HVD230**, **TCAN334**, **MCP2562 (with VIO = 3.3 V)**, and others. Record supply voltage, standby mode, ESD rating, package and stock.
+- Check that **NUP2105LT1G** (ESD) is still available, and find an alternate.
+- Pick a jumper or solder bridge for the termination resistor.
 
 ### Step 2: Current consumption
-- 🟢 From the transceiver datasheet, find supply current in **dominant** state (worst case) → `power-budget.csv`.
+- From the transceiver datasheet, find supply current in **dominant** state (worst case) → `power-budget.csv`.
 
 ### Step 3: Design
-- 🟢 Draw the transceiver from the datasheet's typical application.
-- 🟡 Decide on termination: plain 120 Ω, or **split termination** (2 × 60 Ω + cap to GND) for less noise. Justify in `notes.md`.
-- 🟡 Standby/silent pin: tie it, or give it to an MCU GPIO? Agree with firmware.
+- Draw the transceiver from the datasheet's typical application.
+- Decide on termination: plain 120 Ω, or **split termination** (2 × 60 Ω + cap to GND) for less noise. Justify in `notes.md`.
+- Standby/silent pin: tie it, or give it to an MCU GPIO? Agree with firmware.
 
 ## Research questions (`notes.md`)
 These are important. CAN is central to the whole car, and firmware members are researching the same topic.

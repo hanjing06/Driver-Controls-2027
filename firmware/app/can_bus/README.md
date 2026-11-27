@@ -1,4 +1,6 @@
-# CAN Bus Module: RX/TX Queues 🟡
+# CAN Bus Module: RX/TX Queues
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [App](../README.md) › **CAN bus**
 
 **This year's main firmware project.** Owner: · Members:
 **Do your research first:** [`../../research/can-fundamentals/`](../../research/can-fundamentals/), [`stm32-bxcan/`](../../research/stm32-bxcan/), [`freertos-queues/`](../../research/freertos-queues/)
@@ -41,18 +43,18 @@ The interface is already drafted in [`can_bus.h`](can_bus.h). Implement it in `c
 
 ### Tasks
 
-| # | Task | Level | Done when |
-|---|---|---|---|
-| 1 | **Encode/decode helpers**: `can_encode_float`, `can_decode_float`, `can_encode_drive_cmd`. Pure C, no HAL | 🟢 | Unit tests in [`../../tests/`](../../tests/) pass on a laptop |
-| 2 | **RX path**: `HAL_CAN_RxFifo0MsgPendingCallback` → `xQueueSendFromISR` into RX queue; count drops when full | 🟡 | Frames sent in loopback mode come out of `can_receive()` |
-| 3 | **TX path**: `can_send()` pushes to TX queue (non-blocking); `can_tx_task` waits for a free mailbox (`HAL_CAN_GetTxMailboxesFreeLevel`) and sends | 🟡 | 100 frames queued at once all arrive in loopback, in order |
-| 4 | **Filters**: accept only the IDs we care about (`0x5xx`, `0x6xx`, `0x70x`) | 🟡 | Frames with other IDs never reach the RX queue |
-| 5 | **RX dispatch**: `can_rx_task` switches on ID, decodes, and updates [`../telemetry/`](../telemetry/) | 🟢🟡 | Fake velocity frame → correct km/h printed over UART |
-| 6 | **Stats & errors**: fill `can_stats_t`, handle `HAL_CAN_ErrorCallback`, print stats over UART every second | 🟡 | Unplugging the bus shows errors climbing |
-| 7 | **Timeout detection**: record last-received time per source (MC, BMS) for [`../faults/`](../faults/) | 🟡 | Stop sending fake BMS frames → timeout flag set within 500 ms |
-| 8 | **Bench test with a real second node**: USB-CAN adapter + SavvyCAN, or a second Nucleo | 🟡🔴 | Drive command visible in SavvyCAN; fake MC/BMS frames decoded correctly |
+| # | Task | Done when |
+|---|---|---|
+| 1 | **Encode/decode helpers**: `can_encode_float`, `can_decode_float`, `can_encode_drive_cmd`. Pure C, no HAL | Unit tests in [`../../tests/`](../../tests/) pass on a laptop |
+| 2 | **RX path**: `HAL_CAN_RxFifo0MsgPendingCallback` → `xQueueSendFromISR` into RX queue; count drops when full | Frames sent in loopback mode come out of `can_receive()` |
+| 3 | **TX path**: `can_send()` pushes to TX queue (non-blocking); `can_tx_task` waits for a free mailbox (`HAL_CAN_GetTxMailboxesFreeLevel`) and sends | 100 frames queued at once all arrive in loopback, in order |
+| 4 | **Filters**: accept only the IDs we care about (`0x5xx`, `0x6xx`, `0x70x`) | Frames with other IDs never reach the RX queue |
+| 5 | **RX dispatch**: `can_rx_task` switches on ID, decodes, and updates [`../telemetry/`](../telemetry/) | Fake velocity frame → correct km/h printed over UART |
+| 6 | **Stats & errors**: fill `can_stats_t`, handle `HAL_CAN_ErrorCallback`, print stats over UART every second | Unplugging the bus shows errors climbing |
+| 7 | **Timeout detection**: record last-received time per source (MC, BMS) for [`../faults/`](../faults/) | Stop sending fake BMS frames → timeout flag set within 500 ms |
+| 8 | **Bench test with a real second node**: USB-CAN adapter + SavvyCAN, or a second Nucleo | Drive command visible in SavvyCAN; fake MC/BMS frames decoded correctly |
 
-Suggested split: 🟢 members take 1 and 5 with a 🟡 partner; 🟡 members take 2–4 and 6–7; task 8 is done together.
+Suggested split: newer members take 1 and 5 with a more experienced partner; members with some C / microcontroller experience take 2–4 and 6–7; task 8 is done together.
 
 ### Testing without a second board
 

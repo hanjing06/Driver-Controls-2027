@@ -1,5 +1,7 @@
 # Design Requirements
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Design requirements**
+
 *Fill in during Phase 1. `TBD` items are decisions the team still has to make.*
 
 ## Electrical

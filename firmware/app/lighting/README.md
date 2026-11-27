@@ -1,4 +1,6 @@
-# Lighting 🟢🟡
+# Lighting
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [App](../README.md) › **Lighting**
 
 **Owner:** · **Members:**
 
@@ -13,6 +15,6 @@ Controls the 12 V lights through the MOSFET outputs:
 `ButtonManaging.c` (`brake_light`, button tasks at 100 ms / 500 ms).
 
 ## Tasks
-- 🟢 Implement the logic with LEDs on a Nucleo + buttons/jumpers standing in for the real inputs
-- 🟡 Blink timing from a tick counter (no `osDelay` per light), and left/right blink in sync with hazard
-- 🟢 Check the race regulations for required blink rate / brake light rules
+- Implement the logic with LEDs on a Nucleo + buttons/jumpers standing in for the real inputs
+- Blink timing from a tick counter (no `osDelay` per light), and left/right blink in sync with hazard
+- Check the race regulations for required blink rate / brake light rules

@@ -1,5 +1,7 @@
 # Hardware: 2027 Driver Controls PCB
 
+[Home](../README.md) › **Hardware**
+
 > **New hardware member? This page is your onboarding.** Read it top to bottom, then open the README of the circuit block you've been assigned.
 
 ---
@@ -40,31 +42,31 @@ After all blocks pass schematic review, the experienced members lead **layout** 
 
 ## 4. Circuit blocks and assignments
 
-Each block has **one owner** (someone with some experience) and **one to three members**. Blocks are rated so you can pick one that fits you:
+Each block has **one owner** (someone with some experience) and **one to three members**. To help you pick one that fits you:
 
-- 🟢 **Beginner-friendly.** Good if this is your first circuit. Mostly part research and simple, well-documented circuits.
-- 🟡 **Intermediate.** You've done a circuits course or a small project. Involves some calculations.
-- 🔴 **Advanced.** Critical to the board working at all. Best owned by someone experienced, with a beginner pairing in.
+- **Beginner-friendly** (Connectors, Display, Debug & programming). Good if this is your first circuit. Mostly part research and simple, well-documented circuits.
+- **Intermediate** (HV interface, Driver inputs, Lighting, CAN). You've done a circuits course or a small project. Involves some calculations.
+- **Advanced** (Power, MCU core). Critical to the board working at all. Best owned by someone experienced, with a beginner pairing in.
 
-| Block | Folder | What it is | Level | Owner | Members |
-|---|---|---|---|---|---|
-| Connectors | [`circuits/connectors/`](circuits/connectors/) | Every wire that enters or leaves the board | 🟢 | | |
-| Display | [`circuits/display/`](circuits/display/) | Driver LCD over I²C | 🟢 | | |
-| Debug & programming | [`circuits/debug-programming/`](circuits/debug-programming/) | SWD header, UART header, status LEDs, test points | 🟢🟡 | | |
-| HV interface & indicators | [`circuits/hv-interface/`](circuits/hv-interface/) | LV/HV switches, pre-charge & contactor LEDs, status LEDs | 🟡 | | |
-| Driver inputs | [`circuits/driver-inputs/`](circuits/driver-inputs/) | Pedal + buttons/switches: 12 V → 3.3 V conditioning | 🟡 | | |
-| Lighting | [`circuits/lighting/`](circuits/lighting/) | MOSFETs that switch the 12 V lights | 🟡 | | |
-| CAN | [`circuits/can/`](circuits/can/) | CAN transceiver, protection, termination | 🟡 | | |
-| Power | [`circuits/power/`](circuits/power/) | 12 V input protection → 3.3 V regulator | 🔴 | | |
-| MCU core | [`circuits/mcu-core/`](circuits/mcu-core/) | The STM32 chip, decoupling, crystal, reset, boot | 🔴 | | |
+| Block | Folder | What it is | Owner | Members |
+|---|---|---|---|---|
+| Connectors | [`circuits/connectors/`](circuits/connectors/) | Every wire that enters or leaves the board | | |
+| Display | [`circuits/display/`](circuits/display/) | Driver LCD over I²C | | |
+| Debug & programming | [`circuits/debug-programming/`](circuits/debug-programming/) | SWD header, UART header, status LEDs, test points | | |
+| HV interface & indicators | [`circuits/hv-interface/`](circuits/hv-interface/) | LV/HV switches, pre-charge & contactor LEDs, status LEDs | | |
+| Driver inputs | [`circuits/driver-inputs/`](circuits/driver-inputs/) | Pedal + buttons/switches: 12 V → 3.3 V conditioning | | |
+| Lighting | [`circuits/lighting/`](circuits/lighting/) | MOSFETs that switch the 12 V lights | | |
+| CAN | [`circuits/can/`](circuits/can/) | CAN transceiver, protection, termination | | |
+| Power | [`circuits/power/`](circuits/power/) | 12 V input protection → 3.3 V regulator | | |
+| MCU core | [`circuits/mcu-core/`](circuits/mcu-core/) | The STM32 chip, decoupling, crystal, reset, boot | | |
 
-*The Driver Controls Lead fills in names at the first meeting. If you're not sure where you fit, pick a 🟢 block, or ask to pair into a 🔴 one. Pairing is the fastest way to learn.*
+*The Driver Controls Lead fills in names at the first meeting. If you're not sure where you fit, pick a beginner-friendly block, or ask to pair into an advanced one. Pairing is the fastest way to learn.*
 
 Each block README has the same sections:
 1. **What this circuit does**
 2. **How it was done before** (2026 board)
 3. **What changes now that we're chip-down**
-4. **Your tasks**, split by Step and tagged 🟢/🟡/🔴 so everyone in the block has something to do
+4. **Your tasks**, split by Step so everyone in the block has something to do
 5. **Done when**: what to hand in
 6. **Resources**
 
