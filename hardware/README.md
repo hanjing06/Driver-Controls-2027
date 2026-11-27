@@ -57,8 +57,8 @@ Each block has **one owner** (someone with some experience) and **one to three m
 | Driver inputs | [`circuits/driver-inputs/`](circuits/driver-inputs/) | Pedal + buttons/switches: 12 V → 3.3 V conditioning | |Samarth|
 | Lighting | [`circuits/lighting/`](circuits/lighting/) | MOSFETs that switch the 12 V lights | | |
 | CAN | [`circuits/can/`](circuits/can/) | CAN transceiver, protection, termination | | |
-| Power | [`circuits/power/`](circuits/power/) | 12 V input protection → 3.3 V regulator | | |
-| MCU core | [`circuits/mcu-core/`](circuits/mcu-core/) | The STM32 chip, decoupling, crystal, reset, boot | |Owen, Sahil|
+| Power | [`circuits/power/`](circuits/power/) | 12 V input protection → 3.3 V regulator | | Owen, Sahil|
+| MCU core | [`circuits/mcu-core/`](circuits/mcu-core/) | The STM32 chip, decoupling, crystal, reset, boot | |Owen, Sahil, Samarth|
 
 *The Driver Controls Lead fills in names at the first meeting. If you're not sure where you fit, pick a beginner-friendly block, or ask to pair into an advanced one. Pairing is the fastest way to learn.*
 
