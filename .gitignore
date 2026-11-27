@@ -21,6 +21,15 @@ fp-info-cache
 *.net
 *.dsn
 *.ses
+*.000
+*-cache*
+*-bak*
+~*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
+**/*-backups/*.zip
+.history/
 
 # Keep our tracked CSVs (parts tracker, power budget, BOMs) - do NOT ignore *.csv
 
