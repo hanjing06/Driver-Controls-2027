@@ -1,5 +1,7 @@
 # Nucleo → Chip-Down Migration
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Nucleo-to-chip migration**
+
 In 2026 the Nucleo-F302R8 gave us these blocks for free. In 2027 each one becomes a section of **our** schematic. Reference: ST AN4206 and the Nucleo-64 schematic (MB1136), which is a known-good design to copy from.
 
 | # | Block | What we need | Notes / decisions |

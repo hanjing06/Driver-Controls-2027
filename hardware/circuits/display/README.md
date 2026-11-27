@@ -1,4 +1,6 @@
-# Display 🟢
+# Display
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Display**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/display.kicad_sch`
@@ -22,16 +24,16 @@ The LCD itself can stay. Now the pull-ups and LCD power come from our board, and
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Check the NHD-C0220BIZ is still available. Find 1–2 alternatives (bigger? backlit? still I²C, 3.3 V).
-- 🟢 Find the connector/cable the LCD needs and whether it mounts on the board or on the dash.
+- Check the NHD-C0220BIZ is still available. Find 1–2 alternatives (bigger? backlit? still I²C, 3.3 V).
+- Find the connector/cable the LCD needs and whether it mounts on the board or on the dash.
 
 ### Step 2: Current consumption
-- 🟢 LCD logic current + **backlight current** from the datasheet → `power-budget.csv` (3.3 V).
+- LCD logic current + **backlight current** from the datasheet → `power-budget.csv` (3.3 V).
 
 ### Step 3: Design
-- 🟢 Draw the LCD connector and any caps the LCD datasheet requires.
-- 🟢 Pick I²C pull-up values (typically 2.2 kΩ–10 kΩ at 3.3 V). Explain your choice in `notes.md`.
-- 🟢 Backlight resistor if needed.
+- Draw the LCD connector and any caps the LCD datasheet requires.
+- Pick I²C pull-up values (typically 2.2 kΩ–10 kΩ at 3.3 V). Explain your choice in `notes.md`.
+- Backlight resistor if needed.
 
 ## Research questions (`notes.md`)
 - How does I²C work: addresses, start/stop, ACK?

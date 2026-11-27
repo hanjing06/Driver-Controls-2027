@@ -1,4 +1,6 @@
-# Example 03: CAN Loopback 🟡
+# Example 03: CAN Loopback
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Examples](../README.md) › **03 CAN loopback**
 
 **Goal:** send and receive a CAN frame on a single Nucleo, with no transceiver or bus, using loopback mode.
 **Read first:** [`../../research/can-fundamentals/`](../../research/can-fundamentals/)

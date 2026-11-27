@@ -1,4 +1,6 @@
-# Research: STM32 bxCAN Peripheral 🟡
+# Research: STM32 bxCAN Peripheral
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **STM32 bxCAN**
 
 **Assigned to:**
 **Read first:** [`../can-fundamentals/`](../can-fundamentals/)

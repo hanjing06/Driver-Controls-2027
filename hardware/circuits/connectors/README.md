@@ -1,4 +1,6 @@
-# Connectors 🟢
+# Connectors
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Connectors**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/connectors.kicad_sch`
@@ -18,16 +20,16 @@ The board will likely be smaller, so connector count and placement matter more. 
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Check MX150 availability (headers **and** mating housings + crimp terminals, since the harness team needs those too).
-- 🟢 Find one alternative family (e.g. Molex Micro-Fit 3.0, TE Deutsch DTM) and compare: current per pin, locking, sealing, cost, crimp tool needed.
+- Check MX150 availability (headers **and** mating housings + crimp terminals, since the harness team needs those too).
+- Find one alternative family (e.g. Molex Micro-Fit 3.0, TE Deutsch DTM) and compare: current per pin, locking, sealing, cost, crimp tool needed.
 
 ### Step 2: Current consumption
-- 🟢 For every connector pin, write the max current it carries (from the other blocks' numbers in `power-budget.csv`). Make sure it's below the pin rating. Power and lighting pins especially.
+- For every connector pin, write the max current it carries (from the other blocks' numbers in `power-budget.csv`). Make sure it's below the pin rating. Power and lighting pins especially.
 
 ### Step 3: Design
-- 🟢 Make a **pinout table** for each connector in `pinout.md`: pin #, net name (from the ICD), direction, max current, wire gauge.
-- 🟢 Draw `connectors.kicad_sch` with net labels matching the ICD exactly.
-- 🟡 Review the pinout with the harness/electrical team and the people who own the boards on the other end.
+- Make a **pinout table** for each connector in `pinout.md`: pin #, net name (from the ICD), direction, max current, wire gauge.
+- Draw `connectors.kicad_sch` with net labels matching the ICD exactly.
+- Review the pinout with the harness/electrical team and the people who own the boards on the other end.
 
 ## Research questions (`notes.md`)
 - What makes a connector "automotive-grade" (vibration, locking, sealing)?

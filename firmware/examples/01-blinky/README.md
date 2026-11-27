@@ -1,4 +1,6 @@
-# Example 01: Blinky + UART 🟢
+# Example 01: Blinky + UART
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Examples](../README.md) › **01 Blinky**
 
 **Goal:** prove your toolchain works, and learn CubeMX, GPIO, UART and flashing.
 

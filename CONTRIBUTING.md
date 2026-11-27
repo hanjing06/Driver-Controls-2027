@@ -1,5 +1,7 @@
 # Contributing
 
+[Home](README.md) › **Contributing**
+
 ## Branches
 
 `main` is protected: no direct pushes. Work on a branch named after your track:

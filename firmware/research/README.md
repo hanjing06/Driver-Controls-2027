@@ -1,5 +1,7 @@
 # Research (Track A)
 
+[Home](../../README.md) › [Firmware](../README.md) › **Research**
+
 Research comes before code this design cycle. Each topic folder has a README with **why it matters**, **questions to answer**, **where to look**, and **what to hand in**.
 
 ## How to do a research topic
@@ -16,13 +18,13 @@ Research comes before code this design cycle. Each topic folder has a README wit
 
 ## Topics
 
-| Topic | Level | Depends on |
-|---|---|---|
-| [`can-fundamentals/`](can-fundamentals/) | 🟢 | — (**everyone reads this**) |
-| [`can-tools/`](can-tools/) | 🟢 | can-fundamentals |
-| [`freertos-queues/`](freertos-queues/) | 🟢🟡 | — |
-| [`stm32-bxcan/`](stm32-bxcan/) | 🟡 | can-fundamentals |
-| [`motor-controller-can/`](motor-controller-can/) | 🟡 | can-fundamentals |
-| [`bms-can/`](bms-can/) | 🟡 | can-fundamentals |
+| Topic | Depends on |
+|---|---|
+| [`can-fundamentals/`](can-fundamentals/) | — (**everyone reads this**) |
+| [`can-tools/`](can-tools/) | can-fundamentals |
+| [`freertos-queues/`](freertos-queues/) | — |
+| [`stm32-bxcan/`](stm32-bxcan/) | can-fundamentals |
+| [`motor-controller-can/`](motor-controller-can/) | can-fundamentals |
+| [`bms-can/`](bms-can/) | can-fundamentals |
 
 Good research notes from this year become the onboarding material for next year.

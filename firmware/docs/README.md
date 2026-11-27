@@ -1,5 +1,7 @@
 # Firmware Reference Docs
 
+[Home](../../README.md) › [Firmware](../README.md) › **Docs**
+
 Reference material for the whole firmware team. Your instructions are in [`../README.md`](../README.md) and each module/research folder's README.
 
 | Doc | Contents |

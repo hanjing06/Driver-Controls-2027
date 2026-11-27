@@ -1,4 +1,6 @@
-# Debug & Programming 🟢🟡
+# Debug & Programming
+
+[Home](../../../README.md) › [Hardware](../../README.md) › **Debug & programming**
 
 **Owner:** · **Members:**
 **KiCad sheet:** `kicad/debug.kicad_sch`
@@ -27,17 +29,17 @@ No USB on the chip-down board. We add a debug connector and use an external ST-L
 ## Your tasks
 
 ### Step 1: Parts & availability
-- 🟢 Compare SWD connector options: **2×5 1.27 mm Cortex-Debug header** vs. **Tag-Connect TC2030** (no part on the board, needs a special cable). List pros/cons and stock in `notes.md` / `parts-tracker.csv`.
-- 🟢 Pick a UART header (e.g. 1×3 or 1×6 2.54 mm to match a common USB-UART adapter), status LEDs, and test point parts.
-- 🟢 Check which ST-LINK the team owns or needs to buy.
+- Compare SWD connector options: **2×5 1.27 mm Cortex-Debug header** vs. **Tag-Connect TC2030** (no part on the board, needs a special cable). List pros/cons and stock in `notes.md` / `parts-tracker.csv`.
+- Pick a UART header (e.g. 1×3 or 1×6 2.54 mm to match a common USB-UART adapter), status LEDs, and test point parts.
+- Check which ST-LINK the team owns or needs to buy.
 
 ### Step 2: Current consumption
-- 🟢 LED current: choose a resistor so each LED draws ~2–5 mA from 3.3 V: `R = (3.3 − V_f) / I`. Add to `power-budget.csv`.
+- LED current: choose a resistor so each LED draws ~2–5 mA from 3.3 V: `R = (3.3 − V_f) / I`. Add to `power-budget.csv`.
 
 ### Step 3: Design
-- 🟢 Draw the SWD connector with the **standard ARM Cortex-Debug 10-pin pinout** (or TC2030 pinout). Double-check against the ST-LINK manual.
-- 🟢 UART header, LEDs with resistors, test points.
-- 🟡 Make a list of which signals deserve test points (ask every other block for their one most useful test point).
+- Draw the SWD connector with the **standard ARM Cortex-Debug 10-pin pinout** (or TC2030 pinout). Double-check against the ST-LINK manual.
+- UART header, LEDs with resistors, test points.
+- Make a list of which signals deserve test points (ask every other block for their one most useful test point).
 
 ## Research questions (`notes.md`)
 - What is SWD and how is it different from JTAG?

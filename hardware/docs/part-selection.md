@@ -1,5 +1,7 @@
 # Step 1: Part Selection & Availability Check
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Part selection**
+
 **This is the first task for every new hardware member.** Before anyone draws a schematic, we confirm that every part on the board can actually be bought, and in quantity, for the whole build season.
 
 Work goes into [`../bom/parts-tracker.csv`](../bom/parts-tracker.csv). One row per part.

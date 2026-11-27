@@ -1,5 +1,7 @@
 # Shared Docs (Hardware + Firmware)
 
+[Home](../README.md) › **Docs**
+
 | Doc | Contents |
 |---|---|
 | [`system-overview.md`](system-overview.md) | What the VCU does, voltage domains, startup sequence, who owns what |

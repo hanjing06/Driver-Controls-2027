@@ -1,5 +1,7 @@
 # VCU_2025 Firmware: Reference Notes
 
+[Home](../../README.md) › [Docs](../README.md) › **2025 firmware**
+
 Repo: [uixt/VCU_2025](https://github.com/uixt/VCU_2025) · STM32CubeIDE · STM32F302R8 (Nucleo) · FreeRTOS (CMSIS-RTOS v1)
 
 ## What's in it

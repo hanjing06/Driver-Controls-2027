@@ -1,5 +1,7 @@
 # Firmware: 2027 Driver Controls
 
+[Home](../README.md) › **Firmware**
+
 > **New firmware member? This page is your onboarding.** Read it top to bottom, then go to your assigned research topic or module folder.
 
 ---
@@ -40,25 +42,25 @@ Work happens in three tracks, in this order. Everyone does Track A first.
 
 Research is a big part of this design cycle. Before we write production code, every member should understand **how CAN works, how the STM32 does CAN, and how our car uses it**. Each topic folder in [`research/`](research/) has a README with the questions to answer and where to look.
 
-| Topic | Folder | Level | Assigned to |
-|---|---|---|---|
-| CAN fundamentals | [`research/can-fundamentals/`](research/can-fundamentals/) | 🟢 **everyone reads this** | all |
-| STM32 bxCAN peripheral | [`research/stm32-bxcan/`](research/stm32-bxcan/) | 🟡 | |
-| FreeRTOS tasks & queues | [`research/freertos-queues/`](research/freertos-queues/) | 🟢🟡 | |
-| Motor controller CAN protocol | [`research/motor-controller-can/`](research/motor-controller-can/) | 🟡 | |
-| BMS CAN protocol | [`research/bms-can/`](research/bms-can/) | 🟡 | |
-| CAN tools (USB-CAN, SavvyCAN, DBC files) | [`research/can-tools/`](research/can-tools/) | 🟢 | |
+| Topic | Folder | Assigned to |
+|---|---|---|
+| CAN fundamentals | [`research/can-fundamentals/`](research/can-fundamentals/) | all |
+| STM32 bxCAN peripheral | [`research/stm32-bxcan/`](research/stm32-bxcan/) | |
+| FreeRTOS tasks & queues | [`research/freertos-queues/`](research/freertos-queues/) | |
+| Motor controller CAN protocol | [`research/motor-controller-can/`](research/motor-controller-can/) | |
+| BMS CAN protocol | [`research/bms-can/`](research/bms-can/) | |
+| CAN tools (USB-CAN, SavvyCAN, DBC files) | [`research/can-tools/`](research/can-tools/) | |
 
 **Deliverable:** a `notes.md` in the topic folder (your own words, diagrams welcome) and a **5–10 minute explanation at a team meeting**. Teaching it is how we know you understand it, and the notes become the team's documentation.
 
 ### Track B: Hands-on with CAN (after your research) 🔧
 
-| Task | Folder | Level |
-|---|---|---|
-| Warm-up exercises on a Nucleo (blinky → ADC → CAN loopback) | [`examples/`](examples/) | 🟢 |
-| **Implement CAN RX and TX queues** | [`app/can_bus/`](app/can_bus/) | 🟡 (🟢 pairs in) |
-| Decode/encode functions for each message + unit tests | [`app/can_bus/`](app/can_bus/), [`tests/`](tests/) | 🟢🟡 |
-| CAN message definitions as a `.dbc` file | [`research/can-tools/`](research/can-tools/) | 🟢 |
+| Task | Folder |
+|---|---|
+| Warm-up exercises on a Nucleo (blinky → ADC → CAN loopback) | [`examples/`](examples/) |
+| **Implement CAN RX and TX queues** | [`app/can_bus/`](app/can_bus/) |
+| Decode/encode functions for each message + unit tests | [`app/can_bus/`](app/can_bus/), [`tests/`](tests/) |
+| CAN message definitions as a `.dbc` file | [`research/can-tools/`](research/can-tools/) |
 
 The **CAN queues** task is this year's main firmware project. It replaces VCU_2025's ad-hoc CAN code with a clean design: interrupts put frames in a queue, tasks process them, and every frame we send goes through a TX queue.
 
@@ -66,19 +68,19 @@ The **CAN queues** task is this year's main firmware project. It replaces VCU_20
 
 Each module has its own folder in [`app/`](app/) with a README explaining what it does and what to build. These are lower priority than Tracks A and B.
 
-| Module | What it does | Level |
-|---|---|---|
-| [`app/indicators/`](app/indicators/) | Dash LEDs, heartbeat | 🟢 |
-| [`app/gear/`](app/gear/) | Debounced gear selector | 🟢 |
-| [`app/lighting/`](app/lighting/) | Brake, turn, hazard, DRL logic | 🟢🟡 |
-| [`app/pedals/`](app/pedals/) | Pedal ADC → 0–100 % | 🟡 |
-| [`app/telemetry/`](app/telemetry/) | Shared data from CAN, UART print | 🟡 |
-| [`app/display/`](app/display/) | LCD driver + screens | 🟡 |
-| [`app/faults/`](app/faults/) | Collect and latch faults | 🟡 |
-| [`app/vehicle_state/`](app/vehicle_state/) | The state machine | 🔴 |
-| [`app/common/`](app/common/) | Pin map, board support, app entry | 🔴 (firmware lead) |
+| Module | What it does |
+|---|---|
+| [`app/indicators/`](app/indicators/) | Dash LEDs, heartbeat |
+| [`app/gear/`](app/gear/) | Debounced gear selector |
+| [`app/lighting/`](app/lighting/) | Brake, turn, hazard, DRL logic |
+| [`app/pedals/`](app/pedals/) | Pedal ADC → 0–100 % |
+| [`app/telemetry/`](app/telemetry/) | Shared data from CAN, UART print |
+| [`app/display/`](app/display/) | LCD driver + screens |
+| [`app/faults/`](app/faults/) | Collect and latch faults |
+| [`app/vehicle_state/`](app/vehicle_state/) | The state machine |
+| [`app/common/`](app/common/) | Pin map, board support, app entry |
 
-Levels: 🟢 first embedded project · 🟡 some C / microcontroller experience · 🔴 experienced. Mixed-experience pairs are encouraged: a 🟢 member pairing on a 🟡 task is how most people level up.
+Mixed-experience pairs are encouraged: a newer member pairing with someone more experienced is how most people level up.
 
 ## 4. Your first week
 

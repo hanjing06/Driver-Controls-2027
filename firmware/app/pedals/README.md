@@ -1,4 +1,6 @@
-# Pedals 🟡
+# Pedals
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [App](../README.md) › **Pedals**
 
 **Owner:** · **Members:**
 
@@ -9,7 +11,7 @@ Turns the accelerator pedal's analog voltage into a 0.0–1.0 value for the driv
 ADC1 on PA0 with DMA into a 4-sample buffer; `CAN_Transmit.c` averaged it and used it as the motor current.
 
 ## Tasks
-- 🟢 Do [`../../examples/02-adc-pedal`](../../examples/02-adc-pedal/) first
-- 🟡 `pedals_update()`: average the DMA buffer, scale with min/max calibration, apply a deadband near 0
-- 🟡 `pedals_implausible()`: out-of-range detection; agree thresholds with the hardware Driver Inputs block
-- 🟢 Unit tests for scaling and deadband in [`../../tests/`](../../tests/)
+- Do [`../../examples/02-adc-pedal`](../../examples/02-adc-pedal/) first
+- `pedals_update()`: average the DMA buffer, scale with min/max calibration, apply a deadband near 0
+- `pedals_implausible()`: out-of-range detection; agree thresholds with the hardware Driver Inputs block
+- Unit tests for scaling and deadband in [`../../tests/`](../../tests/)

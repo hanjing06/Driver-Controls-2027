@@ -1,4 +1,6 @@
-# Research: Motor Controller CAN Protocol 🟡
+# Research: Motor Controller CAN Protocol
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **Motor controller CAN**
 
 **Assigned to:**
 **Read first:** [`../can-fundamentals/`](../can-fundamentals/)

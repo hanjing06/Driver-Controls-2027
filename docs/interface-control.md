@@ -1,5 +1,7 @@
 # Interface Control Document (ICD): Pin Map
 
+[Home](../README.md) › [Docs](README.md) › **Interface control**
+
 This is the **contract between hardware and firmware**. Hardware assigns each signal to an MCU pin and a connector pin. Firmware configures the `.ioc` and writes `firmware/app/common/pinmap.h` from this table.
 
 **Rules**

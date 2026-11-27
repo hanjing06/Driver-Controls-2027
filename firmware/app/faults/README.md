@@ -1,4 +1,6 @@
-# Faults 🟡
+# Faults
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [App](../README.md) › **Faults**
 
 **Owner:** · **Members:**
 
@@ -9,7 +11,7 @@ Collects every reason the car should not drive (thermal shutoff, HVIL open, BMS 
 Not implemented. This module is new.
 
 ## Tasks
-- 🟡 Get the fault list from the [`bms-can`](../../research/bms-can/) research
-- 🟡 `faults_update()`: check inputs + CAN timeouts (from [`can_bus`](../can_bus/) task 7), latch the bits
-- 🟢 Print active faults by name over UART
-- 🔴 Agree with [`vehicle_state`](../vehicle_state/) on which faults force `VS_FAULT`
+- Get the fault list from the [`bms-can`](../../research/bms-can/) research
+- `faults_update()`: check inputs + CAN timeouts (from [`can_bus`](../can_bus/) task 7), latch the bits
+- Print active faults by name over UART
+- Agree with [`vehicle_state`](../vehicle_state/) on which faults force `VS_FAULT`

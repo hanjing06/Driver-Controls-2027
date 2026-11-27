@@ -1,5 +1,7 @@
 # Layout Guidelines
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Layout guidelines**
+
 *Starting rules. Adjust once the stackup and fab house are chosen.*
 
 ## Stackup

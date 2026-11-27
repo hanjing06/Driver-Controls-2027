@@ -1,5 +1,7 @@
 # Firmware Architecture
 
+[Home](../../README.md) › [Firmware](../README.md) › [Docs](README.md) › **Architecture**
+
 ## Layers
 
 ```

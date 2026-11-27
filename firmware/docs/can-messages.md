@@ -1,5 +1,7 @@
 # CAN Messages
 
+[Home](../../README.md) › [Firmware](../README.md) › [Docs](README.md) › **CAN messages**
+
 Bus: **500 kbit/s**, standard 11-bit IDs (from VCU_2025 `.ioc`).
 The IDs below are from VCU_2025 `CAN_Receive.c` / `CAN_Transmit.c`. They follow the Prohelion motor-controller base-address layout (driver controls base `0x400`, MC1 base `0x500`, MC2 base `0x600`). **Confirm against the 2027 motor controller and BMS configs.**
 

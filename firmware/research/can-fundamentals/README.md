@@ -1,4 +1,6 @@
-# Research: CAN Fundamentals 🟢
+# Research: CAN Fundamentals
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Research](../README.md) › **CAN fundamentals**
 
 **Assigned to:** everyone (one or two people write the notes; everyone reads them)
 

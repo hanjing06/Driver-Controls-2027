@@ -1,5 +1,7 @@
 # Schematic Review Checklist
 
+[Home](../../README.md) › [Hardware](../README.md) › [Docs](README.md) › **Schematic checklist**
+
 Copy this into the PR description and tick each item.
 
 ## General

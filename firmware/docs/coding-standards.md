@@ -1,5 +1,7 @@
 # Coding Standards
 
+[Home](../../README.md) › [Firmware](../README.md) › [Docs](README.md) › **Coding standards**
+
 Short on purpose. Consistency over cleverness.
 
 ## Naming

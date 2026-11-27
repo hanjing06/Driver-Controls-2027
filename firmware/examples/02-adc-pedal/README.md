@@ -1,4 +1,6 @@
-# Example 02: ADC Pedal 🟢🟡
+# Example 02: ADC Pedal
+
+[Home](../../../README.md) › [Firmware](../../README.md) › [Examples](../README.md) › **02 ADC pedal**
 
 **Goal:** read an analog voltage like the accelerator pedal does, using DMA.
 

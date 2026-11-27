@@ -1,24 +1,53 @@
+<div align="center">
+
 # Sunstang Driver Controls 2027
 
 Driver Controls / Vehicle Control Unit (VCU) PCB for **Western Sunstang**, 2027 car.
 
-This repo is the home base for the Driver Controls sub-team, and it's where new general members get onboarded. **Every folder has a README that explains what that part of the system does and what we'd like you to do.** Start here, then follow your track.
+</div>
+
+This repo is used to help and guide members throughout the school year to ease onboarding to the team. This team has two subsections: hardware and firmware. To navigate through this repo, start here and follow through the README which explains what each part of the system does and what you'd like to work on.
 
 | Track | Start here | First tasks |
 |---|---|---|
-| ⚡ **Hardware** | [`hardware/README.md`](hardware/README.md) | Join a **circuit block** → check part availability → calculate current consumption → design |
-| 💾 **Firmware** | [`firmware/README.md`](firmware/README.md) | **Research CAN** (and FreeRTOS, bxCAN, motor controller/BMS protocols) → implement **CAN RX/TX queues** |
+| **Hardware** | [`hardware/README.md`](hardware/README.md) | Join a **circuit block** → check part availability → calculate current consumption → design |
+| **Firmware** | [`firmware/README.md`](firmware/README.md) | **Research CAN** (and FreeRTOS, bxCAN, motor controller/BMS protocols) → implement **CAN RX/TX queues** |
 
 ---
 
-## A new design cycle: chip-down
+## New to GitHub? How to find your way around
 
-The previous board ([Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026)) was a carrier board for an **STM32 Nucleo-F302R8** dev board, running the [VCU_2025](https://github.com/uixt/VCU_2025) firmware.
+You don't need to know Git to read this repo. Everything is clickable in your browser.
+
+- **Every folder has a README.** When you open a folder on GitHub, its README shows up underneath the list of files. That's your instructions for that folder.
+- **Click the links**, not the file list. Each page links to the next place you should go.
+- **Lost? Look at the line under the page title** (e.g. `Home › Firmware › Research › CAN fundamentals`). Click any part of it to go back up. *Home* always brings you back to this page.
+- **Use the page outline.** On any README, click the ☰ list icon at the top right of the file to jump between sections.
+- **Search for a file:** press `t` anywhere in the repo and start typing a name (e.g. `can_bus`).
+
+### Where do I go?
+
+| I want to… | Go to |
+|---|---|
+| Start as a **hardware** member | [Hardware onboarding](hardware/README.md) |
+| Start as a **firmware** member | [Firmware onboarding](firmware/README.md) |
+| Understand the whole system | [System overview](docs/system-overview.md) |
+| See which pin does what | [Pin map (ICD)](docs/interface-control.md) |
+| Find my circuit block | [Hardware › circuit blocks](hardware/README.md#4-circuit-blocks-and-assignments) |
+| Find my research topic | [Firmware › research topics](firmware/research/README.md) |
+| Find my firmware module | [Firmware › app modules](firmware/app/README.md) |
+| Learn how to branch, commit and open a PR | [Contributing guide](CONTRIBUTING.md) |
+| See what last year's team did | [2026 board notes](docs/reference/2026-vcu.md) · [2025 firmware notes](docs/reference/2025-firmware.md) |
+
+---
+
+## Scope for this year
+
+2026, we designed the ([Sunstang-VCU-2026](https://github.com/hanjing06/Sunstang-VCU-2026)) board using the **STM32 Nucleo-F302R8** dev board, running the [VCU_2025](https://github.com/uixt/VCU_2025) firmware.
 
 **For 2027 we're starting a fresh design and replacing the dev board with the STM32 chip itself (STM32F302R8T6) on our own PCB.** The Nucleo used to give us power regulation, a clock, reset and a programmer. Now we design all of that ourselves.
 
-Because members have a mix of experience, the work is split into small pieces. Each one is tagged:
-🟢 beginner-friendly · 🟡 intermediate · 🔴 advanced. Pairing a newer member with an experienced one is encouraged everywhere.
+Because members have a mix of experience, the work is split into small pieces, so there's something for everyone. Pairing a newer member with an experienced one is encouraged everywhere.
 
 ## What the board does
 
@@ -34,7 +63,7 @@ The VCU is the low-voltage brain of the car. It reads the driver's controls, dec
 | 12 V in → 3.3 V, protection | [`power`](hardware/circuits/power/) | — |
 | The STM32 chip + clock/reset | [`mcu-core`](hardware/circuits/mcu-core/) | [`common`](firmware/app/common/) |
 | Programming & debug | [`debug-programming`](hardware/circuits/debug-programming/) | [flashing guide](firmware/docs/flashing-and-debugging.md) |
-| CAN bus | [`can`](hardware/circuits/can/) | [`can_bus`](firmware/app/can_bus/) ⭐ |
+| CAN bus | [`can`](hardware/circuits/can/) | [`can_bus`](firmware/app/can_bus/) (this year's main project) |
 | Pedals, gear, buttons, mode switch | [`driver-inputs`](hardware/circuits/driver-inputs/) | [`pedals`](firmware/app/pedals/), [`gear`](firmware/app/gear/) |
 | Brake / turn / hazard / DRL lights | [`lighting`](hardware/circuits/lighting/) | [`lighting`](firmware/app/lighting/) |
 | HV startup chain & indicators | [`hv-interface`](hardware/circuits/hv-interface/) | [`indicators`](firmware/app/indicators/), [`vehicle_state`](firmware/app/vehicle_state/) |
@@ -45,31 +74,21 @@ Full description: [`docs/system-overview.md`](docs/system-overview.md). Pin map 
 
 ## Repository layout
 
-```
-Sunstang-DriverControls-2027/
-├── README.md                    ← you are here
-├── CONTRIBUTING.md              ← branching, PRs, commit style
-├── docs/                        ← shared: system overview, pin map (ICD), notes on last year's work
-│
-├── hardware/
-│   ├── README.md                ← hardware onboarding + block assignments
-│   ├── circuits/                ← ONE FOLDER PER CIRCUIT BLOCK, each with its own README
-│   │   ├── power/  mcu-core/  debug-programming/  can/  driver-inputs/
-│   │   └── lighting/  hv-interface/  display/  connectors/
-│   ├── bom/                     ← parts-tracker.csv (step 1), power-budget.csv (step 2)
-│   ├── docs/                    ← how-to guides: part selection, power budget, checklists, layout, bring-up
-│   ├── kicad/                   ← KiCad 9 project (one hierarchical sheet per block)
-│   └── libraries/ datasheets/ simulation/ fabrication/
-│
-└── firmware/
-    ├── README.md                ← firmware onboarding: what the system does + what to do
-    ├── research/                ← ONE FOLDER PER RESEARCH TOPIC (CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools)
-    ├── examples/                ← warm-up exercises on a Nucleo (blinky → ADC → CAN loopback)
-    ├── app/                     ← ONE FOLDER PER MODULE (.h, .c, README); can_bus/ is this year's main project
-    ├── tests/                   ← unit tests that run on a laptop
-    ├── DriverControls/          ← STM32CubeIDE project (created by the firmware lead)
-    └── docs/ tools/             ← reference docs; .dbc file and scripts
-```
+| Folder | What's in it |
+|---|---|
+| [`docs/`](docs/) | Shared by both tracks: system overview, pin map (ICD), notes on last year's work |
+| [`hardware/`](hardware/README.md) | **Hardware onboarding** and everything for the PCB |
+| ↳ [`hardware/circuits/`](hardware/README.md#4-circuit-blocks-and-assignments) | One folder per circuit block, each with its own README: [power](hardware/circuits/power/) · [mcu-core](hardware/circuits/mcu-core/) · [debug-programming](hardware/circuits/debug-programming/) · [can](hardware/circuits/can/) · [driver-inputs](hardware/circuits/driver-inputs/) · [lighting](hardware/circuits/lighting/) · [hv-interface](hardware/circuits/hv-interface/) · [display](hardware/circuits/display/) · [connectors](hardware/circuits/connectors/) |
+| ↳ [`hardware/bom/`](hardware/bom/) | `parts-tracker.csv` (step 1), `power-budget.csv` (step 2) |
+| ↳ [`hardware/docs/`](hardware/docs/) | How-to guides: part selection, power budget, checklists, layout, bring-up |
+| ↳ [`hardware/kicad/`](hardware/kicad/) | KiCad 9 project (one hierarchical sheet per block) |
+| [`firmware/`](firmware/README.md) | **Firmware onboarding** and all the code |
+| ↳ [`firmware/research/`](firmware/research/) | One folder per research topic (CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools) |
+| ↳ [`firmware/examples/`](firmware/examples/) | Warm-up exercises on a Nucleo (blinky → ADC → CAN loopback) |
+| ↳ [`firmware/app/`](firmware/app/) | One folder per module (`.h`, `.c`, README); [`can_bus/`](firmware/app/can_bus/) is this year's main project |
+| ↳ [`firmware/tests/`](firmware/tests/) | Unit tests that run on a laptop |
+| ↳ [`firmware/docs/`](firmware/docs/) | Reference: architecture, CAN messages, state machine, coding standards, flashing |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Branching, PRs, commit style |
 
 ## Getting started (everyone)
 
@@ -115,13 +134,6 @@ git push -u origin fw/research-can    # then open a PR on GitHub
 | SWD | Serial Wire Debug, how we flash the chip |
 | HAL / `.ioc` | ST's driver library / the CubeMX config file |
 
-## Contacts
-
-| Role | Name |
-|---|---|
-| Driver Controls Lead | Hanjing Lin |
-| Hardware track lead | *TBD* |
-| Firmware track lead | *TBD* |
 
 ## References
 
