@@ -11,7 +11,7 @@ This repo is used to help and guide members throughout the school year to ease o
 | Track | Start here | First tasks |
 |---|---|---|
 | **Hardware** | [`hardware/README.md`](hardware/README.md) | Join a **circuit block** → check part availability → calculate current consumption → design |
-| **Firmware** | [`firmware/README.md`](firmware/README.md) | **Research CAN** (and FreeRTOS, bxCAN, motor controller/BMS protocols) → implement **CAN RX/TX queues** |
+| **Firmware** | [`firmware/README.md`](firmware/README.md) | **Integration test** of last year's firmware: VCU, motor controllers and BMS on one CAN bus, drive commands, BMS telemetry, accelerator pedal |
 
 ---
 
@@ -34,8 +34,8 @@ You don't need to know Git to read this repo. Everything is clickable in your br
 | Understand the whole system | [System overview](docs/system-overview.md) |
 | See which pin does what | [Pin map (ICD)](docs/interface-control.md) |
 | Find my circuit block | [Hardware › circuit blocks](hardware/README.md#4-circuit-blocks-and-assignments) |
+| Find my firmware task | [Firmware › integration test](firmware/integration-test/README.md) |
 | Find my research topic | [Firmware › research topics](firmware/research/README.md) |
-| Find my firmware module | [Firmware › app modules](firmware/app/README.md) |
 | Learn how to branch, commit and open a PR | [Contributing guide](CONTRIBUTING.md) |
 | See what last year's team did | [2026 board notes](docs/reference/2026-vcu.md) · [2025 firmware notes](docs/reference/2025-firmware.md) |
 
@@ -63,7 +63,7 @@ The VCU is the low-voltage brain of the car. It reads the driver's controls, dec
 | 12 V in → 3.3 V, protection | [`power`](hardware/circuits/power/) | — |
 | The STM32 chip + clock/reset | [`mcu-core`](hardware/circuits/mcu-core/) | [`common`](firmware/app/common/) |
 | Programming & debug | [`debug-programming`](hardware/circuits/debug-programming/) | [flashing guide](firmware/docs/flashing-and-debugging.md) |
-| CAN bus | [`can`](hardware/circuits/can/) | [`can_bus`](firmware/app/can_bus/) (this year's main project) |
+| CAN bus | [`can`](hardware/circuits/can/) | [`can_bus`](firmware/app/can_bus/) (tested first in the [integration test](firmware/integration-test/)) |
 | Pedals, gear, buttons, mode switch | [`driver-inputs`](hardware/circuits/driver-inputs/) | [`pedals`](firmware/app/pedals/), [`gear`](firmware/app/gear/) |
 | Brake / turn / hazard / DRL lights | [`lighting`](hardware/circuits/lighting/) | [`lighting`](firmware/app/lighting/) |
 | HV startup chain & indicators | [`hv-interface`](hardware/circuits/hv-interface/) | [`indicators`](firmware/app/indicators/), [`vehicle_state`](firmware/app/vehicle_state/) |
@@ -93,6 +93,8 @@ Driver-Controls-2027/
 │       └── STM32 / USB / PowerSupply / User_IO .kicad_sch
 └── firmware/
     ├── README.md, DriverControls/ (CubeMX project)
+    ├── integration-test/         main project: 01-can-bus-setup, 02-motor-controller,
+    │                             03-bms-telemetry, 04-accel-pedal, test-log.md
     ├── research/                 CAN, bxCAN, FreeRTOS, MC & BMS protocols, tools
     ├── examples/                 01-blinky, 02-adc-pedal, 03-can-loopback
     ├── app/                      can_bus, pedals, gear, lighting, indicators, display,
@@ -109,9 +111,10 @@ Driver-Controls-2027/
 | ↳ [`hardware/docs/`](hardware/docs/) | How-to guides: part selection, power budget, checklists, layout, bring-up |
 | ↳ [`hardware/kicad/`](hardware/kicad/) | KiCad project and schematic hierarchy |
 | [`firmware/`](firmware/README.md) | **Firmware onboarding** and all the code |
+| ↳ [`firmware/integration-test/`](firmware/integration-test/) | **This year's main project**: one folder per test task, plus the shared test log |
 | ↳ [`firmware/research/`](firmware/research/) | One folder per research topic |
 | ↳ [`firmware/examples/`](firmware/examples/) | Warm-up exercises on a Nucleo |
-| ↳ [`firmware/app/`](firmware/app/) | One folder per module; [`can_bus/`](firmware/app/can_bus/) is this year's main project |
+| ↳ [`firmware/app/`](firmware/app/) | Later: one folder per new code module |
 | ↳ [`firmware/tests/`](firmware/tests/) · [`firmware/docs/`](firmware/docs/) | Laptop unit tests · reference docs |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Branching, PRs, commit style |
 
@@ -121,6 +124,7 @@ Driver-Controls-2027/
 - [ ] **Update the 20-pin headers** to use the same footprint as the Nucleo board headers
 - [ ] **Recalculate current consumption** using [`hardware/bom/current-calculations.xlsx`](hardware/bom/current-calculations.xlsx) (fill the blue cells from datasheets), then pick regulator, fuse and MOSFETs
 - [ ] Populate the schematic hierarchy sheets (see [`hardware/kicad/README.md`](hardware/kicad/README.md))
+- [ ] **Run the firmware integration test**: VCU, motor controllers and BMS on one CAN bus, drive commands, BMS telemetry and the accelerator pedal (see [`firmware/integration-test/`](firmware/integration-test/))
 
 ## Getting started (everyone)
 
@@ -142,10 +146,10 @@ git push -u origin fw/research-can    # then open a PR on GitHub
 
 | Phase | Hardware | Firmware |
 |---|---|---|
-| **0. Onboarding** | Join a block, read last year's schematic | Toolchain + warm-up examples on a Nucleo |
-| **1. Research & parts** | Part selection & availability per block | Research topics (CAN first), present at meetings |
-| **2. Numbers** | Current consumption → regulator, fuse, MOSFET choices | CAN RX/TX queues + encode/decode + unit tests |
-| **3. Schematic** | Each block draws its sheet, design review, pin map frozen | Bench test CAN with a USB-CAN adapter; start other modules |
+| **0. Onboarding** | Join a block, read last year's schematic | Toolchain, warm-up examples, build and flash VCU_2025 on a Nucleo |
+| **1. Research & parts** | Part selection & availability per block | CAN, motor controller and BMS research; wire all three devices on one bus |
+| **2. Numbers** | Current consumption → regulator, fuse, MOSFET choices | Integration test: drive commands, BMS telemetry, accelerator pedal; record results |
+| **3. Schematic** | Each block draws its sheet, design review, pin map frozen | Fix issues the test found; start CAN RX/TX queues and other modules |
 | **4. Layout & fab** | Placement, routing, order PCB & parts | Port app modules to the `.ioc` for our pin map (HSE clock) |
 | **5. Bring-up** | Power-on checklist | Flash over SWD, validate each I/O |
 | **6. Integration** | In-car testing | Full startup sequence and CAN with the rest of the car |
