@@ -1,8 +1,8 @@
-# Research (Track A)
+# Research
 
 [Home](../../README.md) › [Firmware](../README.md) › **Research**
 
-Research comes before code this design cycle. Each topic folder has a README with **why it matters**, **questions to answer**, **where to look**, and **what to hand in**.
+Research supports the integration test: learn what you need to run your task. Each topic folder has a README with **why it matters**, **questions to answer**, **where to look**, and **what to hand in**.
 
 ## How to do a research topic
 
@@ -18,13 +18,20 @@ Research comes before code this design cycle. Each topic folder has a README wit
 
 ## Topics
 
+**Needed now** for the [integration test](../integration-test/):
+
+| Topic | Depends on | Needed for |
+|---|---|---|
+| [`can-fundamentals/`](can-fundamentals/) | — (**everyone reads this**) | Everyone |
+| [`can-tools/`](can-tools/) | can-fundamentals | Task 1: bus setup |
+| [`motor-controller-can/`](motor-controller-can/) | can-fundamentals | Task 2: motor controller |
+| [`bms-can/`](bms-can/) | can-fundamentals | Task 3: BMS telemetry |
+
+**Later**, once the integration test passes:
+
 | Topic | Depends on |
 |---|---|
-| [`can-fundamentals/`](can-fundamentals/) | — (**everyone reads this**) |
-| [`can-tools/`](can-tools/) | can-fundamentals |
-| [`freertos-queues/`](freertos-queues/) | — |
 | [`stm32-bxcan/`](stm32-bxcan/) | can-fundamentals |
-| [`motor-controller-can/`](motor-controller-can/) | can-fundamentals |
-| [`bms-can/`](bms-can/) | can-fundamentals |
+| [`freertos-queues/`](freertos-queues/) | — |
 
 Good research notes from this year become the onboarding material for next year.

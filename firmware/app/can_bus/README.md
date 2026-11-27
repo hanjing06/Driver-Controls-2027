@@ -2,7 +2,9 @@
 
 [Home](../../../README.md) › [Firmware](../../README.md) › [App](../README.md) › **CAN bus**
 
-**This year's main firmware project.** Owner: · Members:
+> **Later.** VCU_2025's CAN code already works. This rewrite starts only after the [integration test](../../integration-test/) passes, and should use what the test found.
+
+Owner: · Members:
 **Do your research first:** [`../../research/can-fundamentals/`](../../research/can-fundamentals/), [`stm32-bxcan/`](../../research/stm32-bxcan/), [`freertos-queues/`](../../research/freertos-queues/)
 
 ## What this module does
